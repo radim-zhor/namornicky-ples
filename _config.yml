@@ -1,0 +1,10 @@
+# Nastavení webu. Roční údaje (datum, kapela, vstupenky…) jsou v _data/rocnik.yml.
+title: Námořnický ples
+description: Tradiční společenský ples s námořnickým tématem v sokolovně v Pozořicích, pod záštitou sportovního klubu 1. Moravská námořní.
+url: "https://namornicky-ples.cz"
+lang: cs
+exclude:
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+  - vendor
