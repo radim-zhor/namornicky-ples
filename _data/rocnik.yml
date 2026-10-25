@@ -1,0 +1,78 @@
+# ============================================================
+#  ÚDAJE ROČNÍKU – tady se mění vše, co se každý rok liší.
+#  Po uložení se web sám přegeneruje (asi za minutu).
+# ============================================================
+
+rocnik: 20                      # pořadí ročníku
+rok: 2027
+datum: "2027-01-09"             # RRRR-MM-DD
+datum_text: "9. 1. 2027"        # jak se datum zobrazí
+datum_dlouhe: "9. ledna 2027"
+den: sobota
+zahajeni: "19:30"
+konec: "2027-01-10T02:00"       # konec plesu (pro kalendář a Google)
+kapela: ROURA
+rumu: 20                        # počet druhů rumů na baru
+
+misto:
+  nazev: Sokolovna Pozořice
+  adresa: "Nad Sokolovnou 65, 664 07 Pozořice, Jihomoravský kraj"
+  mapa: "https://mapy.cz/zakladni?q=Sokolovna%20Pozo%C5%99ice"
+
+kontakt:
+  email: info@namornicky-ples.cz
+  telefon: "+420 775 188 894"
+  facebook: ""                  # odkaz na FB stránku plesu; prázdné = ikona se nezobrazí
+
+# Formulář: ID formuláře z formspree.io (část adresy za /f/). Prázdné = místo formuláře jen e-mail.
+formspree_id: ""
+
+vstupenky:
+  # stav: brzy     = "Vstupenky v prodeji již brzy", bez tlačítka
+  #       prodej   = tlačítko Koupit vstupenky + rezervace Reenio
+  #       vyprodano = "Vyprodáno"
+  stav: brzy
+  cena: ""                      # např. "450 Kč" – prázdné = nezobrazí se
+  reenio_odkaz: ""              # přímý odkaz na rezervaci v Reeniu
+  reenio_vlozeni: ""            # adresa (src) iframe z Reenia; prázdné = jen tlačítko s odkazem
+
+# Program večera. Položky bez času se zobrazí s textem "během večera".
+program_poznamka: "Podrobný program upřesníme."
+program:
+  - cas: "19:30"
+    co: Slavnostní zahájení a předtančení
+    detail: Fanfára, polonéza, valčík
+    hlavni: true
+  - cas: ""
+    co: Hraje kapela ROURA
+    detail: Standardní tance, latinské rytmy i taneční klasika
+  - cas: ""
+    co: Tombola
+    detail: Ceny od partnerů plesu
+    hlavni: true
+  - cas: "0:00"
+    co: Půlnoční předtančení
+    hlavni: true
+  - cas: "2:00"
+    co: Konec plesu
+
+# Fotogalerie: soubory do assets/img/galerie/, sem název souboru a popisek.
+# Prázdný seznam = sekce Fotky se nezobrazí.
+galerie: []
+#  - soubor: predtanceni-2026.jpg
+#    popis: Předtančení 2026
+galerie_alba: ""                # odkaz na všechna alba (např. Facebook)
+
+# Časté dotazy
+dotazy:
+  - otazka: Jaké oblečení na ples?
+    odpoved: Společenský oděv. Pánové oblek, dámy večerní nebo koktejlové šaty. Námořnický doplněk potěší.
+  - otazka: Dají se koupit vstupenky na místě?
+    odpoved: Ne, vstupenky prodáváme pouze online na tomto webu.
+  - otazka: Kde zaparkuji?
+    odpoved: U sokolovny a v okolních ulicích. Doporučujeme domluvit se na odvozu.
+
+# Soubory ke stažení (PDF do assets/soubory/). Prázdný seznam = nezobrazí se.
+ke_stazeni: []
+#  - nazev: Nápojový lístek
+#    soubor: napojovy-listek-2027.pdf

@@ -1,0 +1,22 @@
+---
+layout: null
+---
+{%- assign r = site.data.rocnik -%}
+{%- assign d = r.datum | remove: "-" -%}
+{%- assign z = r.zahajeni | remove: ":" -%}{% if z.size == 3 %}{% assign z = "0" | append: z %}{% endif -%}
+{%- assign k = r.konec | remove: "-" | remove: ":" -%}
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Namornicky ples//CS
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+UID:namornicky-ples-{{ r.rok }}@namornicky-ples.cz
+DTSTAMP:{{ site.time | date: "%Y%m%dT%H%M%SZ" }}
+DTSTART;TZID=Europe/Prague:{{ d }}T{{ z }}00
+DTEND;TZID=Europe/Prague:{{ k }}00
+SUMMARY:Námořnický ples {{ r.rok }}
+LOCATION:{{ r.misto.nazev }}\, {{ r.misto.adresa | replace: ",", "\," }}
+DESCRIPTION:{{ r.rocnik }}. společenský ples\, hraje kapela {{ r.kapela }}. {{ site.url }}
+URL:{{ site.url }}
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,275 @@
+---
+---
+{%- assign r = site.data.rocnik -%}
+{%- assign v = r.vstupenky -%}
+{%- capture start_iso -%}{{ r.datum }}T{% if r.zahajeni.size == 4 %}0{% endif %}{{ r.zahajeni }}:00+01:00{%- endcapture -%}
+<!doctype html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Námořnický ples {{ r.rok }} · {{ r.datum_text }} · Sokolovna Pozořice</title>
+<meta name="description" content="{{ r.rocnik }}. společenský Námořnický ples, {{ r.den }} {{ r.datum_text }} od {{ r.zahajeni }} v sokolovně v Pozořicích. Hraje kapela {{ r.kapela }}.">
+<meta name="theme-color" content="#0F1324">
+<link rel="icon" href="assets/img/favicon.png">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="cs_CZ">
+<meta property="og:title" content="Námořnický ples {{ r.rok }}">
+<meta property="og:description" content="{{ r.den | capitalize }} {{ r.datum_text }} od {{ r.zahajeni }}, Sokolovna Pozořice. Hraje kapela {{ r.kapela }}.">
+<meta property="og:url" content="{{ site.url }}/">
+<meta property="og:image" content="{{ site.url }}/assets/img/og-2027.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="628">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;600;700&family=Jost:wght@300;400;500&display=swap">
+<link rel="stylesheet" href="assets/css/styles.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Event",
+  "name": "Námořnický ples {{ r.rok }}",
+  "description": "{{ r.rocnik }}. společenský ples pod záštitou sportovního klubu 1. Moravská námořní. Hraje kapela {{ r.kapela }}.",
+  "startDate": "{{ start_iso }}",
+  "endDate": "{{ r.konec }}:00+01:00",
+  "eventStatus": "https://schema.org/EventScheduled",
+  "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+  "location": {
+    "@type": "Place",
+    "name": "{{ r.misto.nazev }}",
+    "address": { "@type": "PostalAddress", "streetAddress": "Nad Sokolovnou 65", "postalCode": "664 07", "addressLocality": "Pozořice", "addressCountry": "CZ" }
+  },
+  "image": ["{{ site.url }}/assets/img/og-2027.jpg"],
+  "organizer": { "@type": "Organization", "name": "1. Moravská námořní", "url": "{{ site.url }}" }
+}
+</script>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <a class="brand" href="#top" aria-label="Námořnický ples – úvod"><img src="assets/img/logo.svg" alt="Námořnický ples" width="183" height="39"></a>
+    <button class="burger" id="burger" aria-label="Menu" aria-expanded="false" aria-controls="menu"><span></span></button>
+    <nav id="menu">
+      <ul>
+        <li><a href="#ples">Ples</a></li>
+        <li><a href="#program">Program</a></li>
+        {%- if r.galerie.size > 0 %}
+        <li><a href="#galerie">Fotky</a></li>
+        {%- endif %}
+        <li><a href="#informace">Informace</a></li>
+        <li><a href="#kontakt">Kontakt</a></li>
+        <li><a class="btn" href="#vstupenky">Vstupenky</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero" style="padding:0">
+    <div class="wrap">
+      <div class="eyebrow">1. Moravská námořní · {{ r.rocnik }}. společenský</div>
+      <h1>Námořnický ples</h1>
+      <div class="rule"></div>
+      <p class="sub">hraje kapela {{ r.kapela }}</p>
+      {%- if v.stav == "prodej" %}
+      <a class="btn" href="#vstupenky">Koupit vstupenky</a>
+      {%- elsif v.stav == "vyprodano" %}
+      <div class="soon">Vyprodáno</div>
+      {%- else %}
+      <div class="soon">Vstupenky v prodeji již brzy</div>
+      {%- endif %}
+      <div class="facts">
+        <div><small>{{ r.den }}</small>{{ r.datum_text }}</div>
+        <div><small>zahájení</small>{{ r.zahajeni }}</div>
+        <div><small>místo</small>{{ r.misto.nazev }}</div>
+      </div>
+      <div class="countdown" id="countdown" data-start="{{ start_iso }}" hidden>Do plesu zbývá <span><b id="cd-d"></b>dní</span><span><b id="cd-h"></b>hod</span><span><b id="cd-m"></b>min</span></div>
+    </div>
+    <svg class="wave" viewBox="0 0 1440 70" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M0 30 C 240 8, 520 4, 820 22 S 1260 36, 1440 12 L1440 70 L0 70 Z" fill="#8DA5CF" opacity=".55"/>
+      <path d="M0 46 C 300 26, 620 30, 900 40 S 1280 44, 1440 30 L1440 70 L0 70 Z" fill="#151A2C"/>
+    </svg>
+  </section>
+
+  <section class="about" id="ples">
+    <div class="wrap">
+      <p class="slogan">Ples, na který se nemusíte bát vzít ty nejlepší šaty…</p>
+      <div class="cols">
+        <div><span class="num"><img src="assets/img/znak.svg" alt=""></span><h3>{{ r.rocnik }}. ročník</h3><p>Tradiční společenský ples organizovaný pod záštitou sportovního klubu 1. Moravská námořní.</p></div>
+        <div><span class="num">♫</span><h3>Skvělá kapela</h3><p>Standardní tance, latinské rytmy i taneční klasika. Na ples patří všechno! O správnou atmosféru a zábavu se postará kapela {{ r.kapela }}.</p></div>
+        <div><span class="num">{{ r.rumu }}</span><h3>Bohaté občerstvení</h3><p>{{ r.rocnik }}. ročník? Ochutnejte {{ r.rumu }} druhů rumů! Špičková česká i zahraniční vína.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="program" id="program">
+    <div class="wrap">
+      <h2>Program večera</h2>
+      <div class="rule"></div>
+      <ol class="timeline">
+        {%- for p in r.program %}
+        <li{% if p.hlavni %} class="key"{% endif %}><time>{{ p.cas }}</time><span class="dot"></span><div class="what"><strong>{{ p.co }}</strong>{% if p.detail %}<span>{{ p.detail }}</span>{% endif %}</div></li>
+        {%- endfor %}
+      </ol>
+      {%- if r.program_poznamka != "" %}
+      <p class="note">{{ r.program_poznamka }}</p>
+      {%- endif %}
+    </div>
+  </section>
+
+  <section id="vstupenky">
+    <div class="wrap">
+      <h2>Vstupenky</h2>
+      <div class="rule"></div>
+      {%- if v.stav == "prodej" %}
+      <p class="lead">Vstupenky prodáváme pouze online.{% if v.cena != "" %} Cena {{ v.cena }}.{% endif %} Po zaplacení vám přijdou e-mailem.</p>
+      {%- if v.reenio_vlozeni != "" %}
+      <div class="reenio-embed"><iframe src="{{ v.reenio_vlozeni }}" title="Rezervace vstupenek" loading="lazy"></iframe></div>
+      {%- endif %}
+      {%- if v.reenio_odkaz != "" %}
+      <div class="center"><a class="btn" href="{{ v.reenio_odkaz }}" target="_blank" rel="noopener">{% if v.reenio_vlozeni != "" %}Otevřít rezervaci v novém okně{% else %}Koupit vstupenky{% endif %}</a></div>
+      {%- endif %}
+      {%- elsif v.stav == "vyprodano" %}
+      <div class="ticket-soon"><strong>Vyprodáno</strong><p>Děkujeme za zájem. Pokud se uvolní místa, dáme vědět na Facebooku.</p></div>
+      {%- else %}
+      <div class="ticket-soon">
+        <strong>Vstupenky v prodeji již brzy</strong>
+        <p>Vstupenky budeme prodávat pouze online na tomto webu. Začátek prodeje oznámíme{% if r.kontakt.facebook != "" %} na <a href="{{ r.kontakt.facebook }}" target="_blank" rel="noopener">Facebooku</a>{% else %} na Facebooku{% endif %}.</p>
+      </div>
+      {%- endif %}
+    </div>
+  </section>
+
+  {%- if r.galerie.size > 0 %}
+  <section class="gallery" id="galerie">
+    <div class="wrap">
+      <h2>Jak to u nás vypadá</h2>
+      <div class="rule"></div>
+      <div class="photos">
+        {%- for f in r.galerie %}
+        <figure class="photo{% if forloop.first %} big{% endif %}"><img src="assets/img/galerie/{{ f.soubor }}" alt="{{ f.popis }}" loading="lazy"><figcaption>{{ f.popis }}</figcaption></figure>
+        {%- endfor %}
+      </div>
+      {%- if r.galerie_alba != "" %}
+      <div class="center"><a class="btn ghost" href="{{ r.galerie_alba }}" target="_blank" rel="noopener">Všechna alba</a></div>
+      {%- endif %}
+    </div>
+  </section>
+  {%- endif %}
+
+  <section id="informace">
+    <div class="wrap">
+      <h2>Praktické informace</h2>
+      <div class="rule"></div>
+      <div class="faq">
+        {%- for d in r.dotazy %}
+        <details{% if forloop.first %} open{% endif %}><summary>{{ d.otazka }}</summary><p>{{ d.odpoved }}</p></details>
+        {%- endfor %}
+      </div>
+      <div class="downloads">
+        {%- for s in r.ke_stazeni %}
+        <a href="assets/soubory/{{ s.soubor }}"><span>PDF</span>{{ s.nazev }}</a>
+        {%- endfor %}
+        <a href="ples.ics"><span>ICS</span>Přidat do kalendáře</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="program" id="kontakt">
+    <div class="wrap">
+      <h2>Kontakt</h2>
+      <div class="rule"></div>
+      <div class="contact-grid">
+        <div>
+          <p style="margin:0">Máte-li jakékoli dotazy nebo obavy, neváhejte se na nás obrátit – jsme tu pro vás.</p>
+          <dl>
+            <div><dt>E-mail</dt><dd><a href="mailto:{{ r.kontakt.email }}">{{ r.kontakt.email }}</a></dd></div>
+            <div><dt>Telefon</dt><dd><a href="tel:{{ r.kontakt.telefon | remove: ' ' }}">{{ r.kontakt.telefon }}</a></dd></div>
+            <div><dt>Datum a čas</dt><dd>{{ r.datum_dlouhe }} | {{ r.zahajeni }}</dd></div>
+            <div><dt>Místo plesu</dt><dd>{{ r.misto.nazev }}, {{ r.misto.adresa }}</dd></div>
+          </dl>
+        </div>
+        {%- if r.formspree_id != "" %}
+        <form id="form" action="https://formspree.io/f/{{ r.formspree_id }}" method="POST">
+          <label for="f-name">Jméno *<input id="f-name" name="name" autocomplete="name" required></label>
+          <label for="f-mail">E-mail *<input id="f-mail" name="email" type="email" autocomplete="email" required></label>
+          <label for="f-msg">Zpráva *<textarea id="f-msg" name="message" required></textarea></label>
+          <input type="hidden" name="_subject" value="Dotaz z webu Námořnického plesu">
+          <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
+          <button class="btn" type="submit">Odeslat</button>
+          <p class="sent" id="sent" role="status"></p>
+        </form>
+        {%- else %}
+        <div class="ticket-soon" style="margin:0;align-self:start"><strong>Napište nám</strong><p>Dotazy rádi zodpovíme na <a href="mailto:{{ r.kontakt.email }}">{{ r.kontakt.email }}</a>.</p></div>
+        {%- endif %}
+      </div>
+      <div class="map">
+        <iframe src="https://www.google.com/maps?q=Sokolovna%20Pozo%C5%99ice%2C%20Nad%20Sokolovnou%2065&amp;z=15&amp;output=embed" title="Mapa: {{ r.misto.nazev }}" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+      <p class="map-link"><a href="{{ r.misto.mapa }}" target="_blank" rel="noopener">Otevřít v Mapy.cz →</a></p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <a class="brand" href="#top" aria-label="Námořnický ples"><img src="assets/img/logo.svg" alt="Námořnický ples" width="150" height="32"></a>
+    {%- if r.kontakt.facebook != "" %}
+    <a class="fb" href="{{ r.kontakt.facebook }}" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M13.5 22v-8.2h2.8l.4-3.2h-3.2V8.5c0-.9.3-1.6 1.6-1.6h1.7V4.1c-.3 0-1.3-.1-2.5-.1-2.5 0-4.2 1.5-4.2 4.3v2.4H7.3v3.2h2.8V22h3.4Z"/></svg></a>
+    {%- endif %}
+    <span>Pořádá 1. Moravská námořní</span>
+    <span>© {{ r.rok }} Námořnický ples</span>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var burger = document.getElementById('burger'), menu = document.getElementById('menu');
+  burger.addEventListener('click', function () {
+    var open = menu.classList.toggle('open');
+    burger.setAttribute('aria-expanded', open);
+  });
+  menu.addEventListener('click', function (e) { if (e.target.tagName === 'A') { menu.classList.remove('open'); burger.setAttribute('aria-expanded', false); } });
+
+  var cd = document.getElementById('countdown'), target = new Date(cd.dataset.start).getTime();
+  function tick() {
+    var ms = target - Date.now();
+    if (!(ms > 0)) { cd.hidden = true; return; }
+    var m = Math.floor(ms / 60000);
+    document.getElementById('cd-d').textContent = Math.floor(m / 1440);
+    document.getElementById('cd-h').textContent = Math.floor(m % 1440 / 60);
+    document.getElementById('cd-m').textContent = m % 60;
+    cd.hidden = false;
+  }
+  tick(); setInterval(tick, 30000);
+
+  var links = [].slice.call(document.querySelectorAll('nav li a:not(.btn)'));
+  var secs = links.map(function (a) { return document.querySelector(a.getAttribute('href')); });
+  function spy() {
+    var y = window.scrollY + 120, cur = -1;
+    secs.forEach(function (s, i) { if (s && s.offsetTop <= y) cur = i; });
+    links.forEach(function (a, i) { if (i === cur) a.setAttribute('aria-current', 'true'); else a.removeAttribute('aria-current'); });
+  }
+  window.addEventListener('scroll', spy, { passive: true }); spy();
+
+  var form = document.getElementById('form');
+  if (form) form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var out = document.getElementById('sent'), btn = form.querySelector('button');
+    out.className = 'sent'; out.textContent = 'Odesílám…'; btn.disabled = true;
+    fetch(form.action, { method: 'POST', body: new FormData(form), headers: { Accept: 'application/json' } })
+      .then(function (r) {
+        if (!r.ok) throw new Error();
+        form.reset(); out.textContent = 'Děkujeme, zpráva je odeslaná. Ozveme se co nejdřív.';
+      })
+      .catch(function () {
+        out.className = 'sent error';
+        out.textContent = 'Zprávu se nepodařilo odeslat. Napište nám prosím na ' + {{ r.kontakt.email | jsonify }} + '.';
+      })
+      .finally(function () { btn.disabled = false; });
+  });
+})();
+</script>
+</body>
+</html>
