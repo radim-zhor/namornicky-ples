@@ -5,7 +5,7 @@ Web [namornicky-ples.cz](https://namornicky-ples.cz). Jedna stránka v čistém 
 ## Jak změnit údaje ročníku
 
 Všechno, co se každý rok mění, je v souboru [`_data/rocnik.yml`](_data/rocnik.yml):
-datum, ročník, kapela, počet rumů, stav vstupenek, program, dotazy, fotky.
+datum, ročník, kapela, počet rumů, kontakty, stav vstupenek, program, dotazy, fotky.
 
 1. Otevři soubor na github.com a klikni na tužku (Edit).
 2. Přepiš hodnotu za dvojtečkou. Text s dvojtečkou nebo začínající číslicí dej do uvozovek.
@@ -26,12 +26,6 @@ vstupenky:
 ```
 
 `stav: brzy` ukáže „Vstupenky v prodeji již brzy“, `stav: vyprodano` ukáže „Vyprodáno“.
-
-### Kontaktní formulář (Formspree)
-
-1. Založ účet na [formspree.io](https://formspree.io) s e-mailem info@namornicky-ples.cz a vytvoř formulář.
-2. Z adresy formuláře `https://formspree.io/f/abcdwxyz` zkopíruj poslední část (`abcdwxyz`).
-3. Vlož ji do `formspree_id` v `rocnik.yml`. Dokud je prázdné, web místo formuláře ukazuje e-mail.
 
 ### Fotky
 
