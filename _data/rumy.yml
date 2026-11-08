@@ -49,6 +49,7 @@ oblibene_max: 3
 # foto: název souboru v assets/img/rumy/ (nepovinné)
 rumy:
   - id: xaymaca
+    foto: xaymaca.webp
     nazev: Plantation Xaymaca
     puvod: Jamajka
     cukr: 1
@@ -64,6 +65,7 @@ rumy:
     chut: kokos, dřevo
     popis: Tmavý rum španělského typu od rodinné palírny Varela Hermanos, která pěstuje všechnu třtinu na vlastních plantážích.
   - id: kirk-sweeney
+    foto: kirk-sweeney.webp
     nazev: Kirk & Sweeney Gran Reserva
     puvod: Dominikánská republika
     stari: 12 let
@@ -188,6 +190,7 @@ rumy:
     chut: banán, čokoláda, vaječný koňak
     popis: Blend osmi karibských rumů. Sladký, krémový, skoro dezert.
   - id: legendario
+    foto: legendario.webp
     nazev: Legendario Elixir de Cuba
     puvod: Kuba
     stari: 7 let

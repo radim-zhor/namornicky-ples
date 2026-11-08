@@ -24,7 +24,7 @@
   --paper: #151A2C; --deep: #0F1324; --panel: #1D2440; --panel-2: #232B4B; --line: #2C3550;
   --ink: #E9EDF6; --muted: #A3ADC4; --wave: #8DA5CF; --navy: #1A468E;
   --signal: #D0362F; --signal-hover: #E2554C; --gold: #D9B26A;
-  --good: #6FBF8E; --ok: #8DA5CF; --bad: #C9776F;
+  --amber: #E0A458; --good: #D0362F; --ok: #E0A458; --bad: #6B7593; --card: #1F2747; --tile: #FFFFFF;
   --display: "Palatino Linotype", Palatino, "Book Antiqua", "Crimson Pro", Georgia, serif;
   --body: "Jost", "Avenir Next", "Segoe UI", system-ui, sans-serif;
   --tabbar: 64px;
@@ -61,43 +61,52 @@ h1, h2, h3 { font-family: var(--display); font-weight: 700; margin: 0; text-wrap
 .intro { color: var(--muted); margin: 8px 0 0; }
 .note { font-size: 14px; color: var(--muted); border-left: 2px solid var(--navy); padding: 4px 0 4px 12px; margin: 14px 0 0; }
 .section-title { font-size: 26px; line-height: 1.15; }
+.section-title::after { content: ""; display: block; width: 44px; height: 2px; background: var(--signal); margin-top: 12px; }
 
 /* Cukr (kostičky jako na tištěném lístku) */
 .sugar { display: inline-flex; gap: 3px; vertical-align: middle; }
-.sugar i { width: 9px; height: 9px; border: 1px solid var(--wave); border-radius: 2px; }
-.sugar i.f { background: var(--wave); }
+.sugar i { width: 9px; height: 9px; border: 1px solid rgba(224,164,88,.55); border-radius: 2px; }
+.sugar i.f { background: var(--amber); border-color: var(--amber); }
 .sugar-label { font-size: 12px; color: var(--muted); margin-left: 6px; }
 
 /* Filtry */
 .chips { display: flex; gap: 8px; overflow-x: auto; padding: 16px 0 4px; margin: 0 -16px; padding-inline: 16px; scrollbar-width: none; }
 .chips::-webkit-scrollbar { display: none; }
 .chip { flex: none; border: 1px solid var(--line); background: var(--panel); border-radius: 999px; padding: 8px 14px; font-size: 14px; font-weight: 400; cursor: pointer; white-space: nowrap; }
-.chip[aria-pressed="true"] { background: var(--ink); color: var(--deep); border-color: var(--ink); font-weight: 500; }
+.chip[aria-pressed="true"] { background: var(--signal); color: #fff; border-color: var(--signal); font-weight: 500; }
 
 /* Karty rumů */
 .list { list-style: none; margin: 12px 0 0; padding: 0; display: grid; gap: 10px; }
-.rum { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; overflow: hidden; }
-.rum.tasted { border-color: #3A4670; }
+.rum { background: var(--card); border: 1px solid #323C64; border-radius: 10px; overflow: hidden; box-shadow: 0 1px 0 rgba(255,255,255,.03) inset, 0 6px 18px rgba(0,0,0,.18); }
+.rum.tasted { border-left: 3px solid var(--signal); }
 .rum-head { display: grid; grid-template-columns: 34px 1fr auto; gap: 12px; align-items: start; width: 100%; text-align: left; background: none; border: 0; padding: 14px 14px 12px; cursor: pointer; }
-.rum-no { font: 600 20px/1 var(--display); color: var(--wave); padding-top: 3px; text-align: center; }
-.rum-name { font: 700 19px/1.2 var(--display); }
+.rum-no { font: 600 20px/1 var(--display); color: var(--muted); padding-top: 3px; text-align: center; }
+.rum-head.has-foto { grid-template-columns: 64px 1fr auto; }
+.tile { position: relative; width: 64px; height: 86px; background: var(--tile); border-radius: 8px; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+.tile img { max-width: 88%; max-height: 92%; object-fit: contain; display: block; }
+.tile b { position: absolute; top: 4px; left: 4px; min-width: 18px; height: 18px; border-radius: 9px; background: var(--deep); color: #fff; font: 600 11px/18px var(--body); text-align: center; padding: 0 4px; }
+.rum-name { font: 700 19px/1.2 var(--display); color: #fff; }
 .rum-meta { font-size: 13px; color: var(--muted); margin-top: 3px; }
-.rum-taste { font-size: 14px; margin-top: 6px; color: var(--ink); }
-.rum-price { font: 600 18px/1 var(--display); white-space: nowrap; padding-top: 3px; text-align: right; }
+.rum-taste { font-size: 14px; margin-top: 6px; color: #D6DCEA; font-weight: 400; }
+.rum-price { font: 700 19px/1 var(--display); color: #fff; white-space: nowrap; padding-top: 3px; text-align: right; }
 .rum-price small { display: block; font: 400 11px/1 var(--body); color: var(--muted); margin-top: 4px; }
 .tag { display: inline-block; font: 500 10px/1 var(--body); letter-spacing: .12em; text-transform: uppercase; padding: 4px 6px; border-radius: 3px; margin-right: 6px; vertical-align: 2px; }
 .tag.new { background: var(--navy); color: #fff; }
 .tag.anniv { background: var(--gold); color: var(--deep); }
-.rum-body { display: none; padding: 0 14px 4px 60px; font-size: 15px; color: var(--muted); }
+.rum-body { display: none; padding: 0 14px 4px 60px; font-size: 15px; color: #C3CADB; }
+.rum-head.has-foto ~ .rum-body, .rum-head.has-foto ~ .rate { padding-left: 90px; }
 .rum.open .rum-body { display: block; }
+.rum.open .rate { display: grid; }
+.rum-price .pill { display: inline-block; margin-top: 8px; font-family: var(--body); }
+.rum.open .rum-price .pill { display: none; }
 .rum-body p { margin: 0 0 10px; }
-.rum-foto { width: 100%; max-height: 260px; object-fit: contain; background: var(--deep); border-radius: 6px; margin-bottom: 10px; }
-.rate { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; padding: 0 14px 14px 60px; }
+.rum-foto { display: block; width: 100%; height: 220px; object-fit: contain; background: var(--tile); border-radius: 8px; margin-bottom: 12px; padding: 10px; }
+.rate { display: none; grid-template-columns: repeat(3, 1fr); gap: 6px; padding: 0 14px 14px 60px; }
 .rate button { border: 1px solid var(--line); background: var(--panel-2); border-radius: 6px; padding: 9px 4px; font-size: 13px; font-weight: 400; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 2px; }
 .rate button svg { width: 20px; height: 20px; }
-.rate button[aria-pressed="true"][data-h="3"] { background: var(--good); border-color: var(--good); color: var(--deep); font-weight: 500; }
+.rate button[aria-pressed="true"][data-h="3"] { background: var(--good); border-color: var(--good); color: #fff; font-weight: 500; }
 .rate button[aria-pressed="true"][data-h="2"] { background: var(--ok); border-color: var(--ok); color: var(--deep); font-weight: 500; }
-.rate button[aria-pressed="true"][data-h="1"] { background: var(--bad); border-color: var(--bad); color: var(--deep); font-weight: 500; }
+.rate button[aria-pressed="true"][data-h="1"] { background: var(--bad); border-color: var(--bad); color: #fff; font-weight: 500; }
 .rate-q { grid-column: 1 / -1; font-size: 12px; color: var(--muted); letter-spacing: .04em; }
 .empty { text-align: center; color: var(--muted); padding: 32px 0; }
 
@@ -134,9 +143,10 @@ h1, h2, h3 { font-family: var(--display); font-weight: 700; margin: 0; text-wrap
 .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 18px; }
 .stat { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 12px 8px; text-align: center; }
 .stat b { display: block; font: 700 30px/1 var(--display); }
+.stat:first-child b { color: var(--signal-hover); }
 .stat span { font-size: 12px; color: var(--muted); }
 .progress { height: 6px; background: var(--panel); border-radius: 3px; margin-top: 14px; overflow: hidden; }
-.progress div { height: 100%; background: linear-gradient(90deg, var(--navy), var(--wave)); width: 0; transition: width .4s; }
+.progress div { height: 100%; background: linear-gradient(90deg, var(--signal), var(--amber)); width: 0; transition: width .4s; }
 .progress-t { font-size: 14px; color: var(--muted); margin-top: 8px; }
 .tips { margin-top: 22px; }
 .tips h3, .mine h3 { font-size: 20px; }
@@ -149,7 +159,7 @@ h1, h2, h3 { font-family: var(--display); font-weight: 700; margin: 0; text-wrap
 .mine li b { font: 600 17px/1.2 var(--display); }
 .mine li small { display: block; color: var(--muted); font-size: 13px; }
 .pill { flex: none; font-size: 12px; font-weight: 500; padding: 5px 9px; border-radius: 999px; color: var(--deep); }
-.pill.h3 { background: var(--good); } .pill.h2 { background: var(--ok); } .pill.h1 { background: var(--bad); }
+.pill.h3 { background: var(--good); color: #fff; } .pill.h2 { background: var(--ok); } .pill.h1 { background: var(--bad); color: #fff; }
 .share { display: flex; gap: 10px; align-items: flex-start; font-size: 14px; color: var(--muted); margin-top: 20px; }
 .share input { accent-color: var(--signal); width: 18px; height: 18px; margin-top: 2px; flex: none; }
 .foot { text-align: center; font-size: 13px; color: var(--muted); padding: 8px 0 24px; }
@@ -210,12 +220,12 @@ h1, h2, h3 { font-family: var(--display); font-weight: 700; margin: 0; text-wrap
   <!-- LÍSTEK -->
   <section class="view" id="v-listek" aria-labelledby="h-listek">
     <h2 class="section-title" id="h-listek">{{ k.rumy.size }} rumů na baru</h2>
-    <p class="intro">Ťukněte na rum pro popis. <span class="vecer-only">Co ochutnáte, to ohodnoťte a najdete v záložce Můj večer.</span></p>
+    <p class="intro">Ťukněte na rum pro popis<span class="vecer-only"> a hodnocení. Co ochutnáte, najdete v záložce Můj večer</span>.</p>
     {%- if k.listek_poznamka != "" %}<p class="note">{{ k.listek_poznamka }}</p>{% endif %}
     <div class="chips" role="group" aria-label="Filtr">
       <button class="chip" type="button" data-f="all" aria-pressed="true">Vše</button>
       <button class="chip" type="button" data-f="dry" aria-pressed="false">Suché</button>
-      <button class="chip" type="button" data-f="mid" aria-pressed="false">Střední</button>
+      <button class="chip" type="button" data-f="mid" aria-pressed="false">Středně sladké</button>
       <button class="chip" type="button" data-f="sweet" aria-pressed="false">Sladké</button>
       <button class="chip vecer-only" type="button" data-f="untasted" aria-pressed="false">Neochutnané</button>
       <button class="chip vecer-only" type="button" data-f="tasted" aria-pressed="false">Ochutnané</button>
@@ -260,6 +270,7 @@ h1, h2, h3 { font-family: var(--display); font-weight: 700; margin: 0; text-wrap
 const CFG = {{ k | jsonify }};
 const ROCNIK = {{ r.rocnik }}, DATUM = {{ r.datum_text | jsonify }}, ROK = {{ r.rok }};
 const ZNAK = {{ '/assets/img/znak.svg' | relative_url | jsonify }};
+const FOTO = {{ '/assets/img/rumy/' | relative_url | jsonify }};
 </script>
 <script>
 (() => {
@@ -273,7 +284,7 @@ const ZNAK = {{ '/assets/img/znak.svg' | relative_url | jsonify }};
   };
   const rums = CFG.rumy || [];
   const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
-  const sugarText = n => ["", "suchý", "polosuchý", "střední", "polosladký", "sladký"][n] || "";
+  const sugarText = n => ["", "suchý", "polosuchý", "středně sladký", "polosladký", "sladký"][n] || "";
   const sugar = n => `<span class="sugar" aria-label="cukr ${n} z 5">${[1,2,3,4,5].map(i => `<i class="${i <= n ? "f" : ""}"></i>`).join("")}</span>`;
 
   // ---------- Stav v telefonu ----------
@@ -336,15 +347,15 @@ const ZNAK = {{ '/assets/img/znak.svg' | relative_url | jsonify }};
     const rate = CFG.vecer ? `<div class="rate"><span class="rate-q">Ochutnali jste? Jak vám chutnal?</span>${[3,2,1].map(n =>
       `<button type="button" data-h="${n}" aria-pressed="${h === n}">${ICON[n]}${H[n]}</button>`).join("")}</div>` : "";
     return `<li class="rum${h ? " tasted" : ""}" id="rum-${esc(x.id)}" data-id="${esc(x.id)}">
-      <button class="rum-head" type="button" aria-expanded="false">
-        <span class="rum-no">${i + 1}</span>
+      <button class="rum-head${x.foto ? " has-foto" : ""}" type="button" aria-expanded="false">
+        ${x.foto ? `<span class="tile"><img loading="lazy" alt="" src="${esc(FOTO + x.foto)}"><b>${i + 1}</b></span>` : `<span class="rum-no">${i + 1}</span>`}
         <span><span class="rum-name">${tags}${esc(x.nazev)}</span>
           <span class="rum-meta" style="display:block">${esc(meta)}</span>
           <span style="display:block;margin-top:6px">${sugar(x.cukr)}<span class="sugar-label">${sugarText(x.cukr)}</span></span>
           <span class="rum-taste" style="display:block">${esc(x.chut)}</span></span>
-        <span class="rum-price">${x.cena ? esc(x.cena) + ",-" : ""}<small>${x.cena ? "4 cl" : ""}</small></span>
+        <span class="rum-price">${x.cena ? esc(x.cena) + ",-" : ""}<small>${x.cena ? "4 cl" : ""}</small>${h ? `<span class="pill h${h}">${H[h]}</span>` : ""}</span>
       </button>
-      <div class="rum-body">${x.foto ? `<img class="rum-foto" loading="lazy" alt="${esc(x.nazev)}" src="${esc(ZNAK.replace(/znak\.svg$/, "rumy/" + x.foto))}">` : ""}<p>${esc(x.popis)}</p></div>
+      <div class="rum-body">${x.foto ? `<img class="rum-foto" loading="lazy" alt="${esc(x.nazev)}" src="${esc(FOTO + x.foto)}">` : ""}<p>${esc(x.popis)}</p></div>
       ${rate}
     </li>`;
   };
@@ -369,6 +380,8 @@ const ZNAK = {{ '/assets/img/znak.svg' | relative_url | jsonify }};
     save();
     li.classList.toggle("tasted", !!st.r[id]);
     li.querySelectorAll(".rate button").forEach(x => x.setAttribute("aria-pressed", st.r[id] === +x.dataset.h));
+    const pr = li.querySelector(".rum-price"), old = pr.querySelector(".pill"); if (old) old.remove();
+    if (st.r[id]) pr.insertAdjacentHTML("beforeend", `<span class="pill h${st.r[id]}">${H[st.r[id]]}</span>`);
     updateBadge();
     if (filter === "tasted" || filter === "untasted") setTimeout(renderList, 350);
   });
@@ -439,7 +452,7 @@ const ZNAK = {{ '/assets/img/znak.svg' | relative_url | jsonify }};
     g.fillStyle = "#FFFFFF"; g.font = `700 68px ${serif}`; g.fillText("Můj rumový večer", W / 2, 362);
     g.fillStyle = "#A3ADC4"; g.font = `400 28px ${sans}`;
     g.fillText(`Ochutnáno ${t.length} z ${rums.length} rumů`, W / 2, 405);
-    const col = { 3: "#6FBF8E", 2: "#8DA5CF", 1: "#C9776F" };
+    const col = { 3: "#E2554C", 2: "#E0A458", 1: "#8E97B3" };
     t.forEach((x, i) => {
       const y = top + 40 + i * rowH;
       g.textAlign = "left"; g.fillStyle = "#E9EDF6"; g.font = `600 34px ${serif}`;
