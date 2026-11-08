@@ -191,3 +191,9 @@ figure.photo { margin: 0; }
 .photo figcaption { position: relative; text-shadow: 0 1px 3px rgba(0,0,0,.6); }
 dd a { text-decoration: none; }
 dd a:hover { color: var(--wave); }
+.prices { list-style: none; margin: 40px auto 0; padding: 0; max-width: 760px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.prices li { background: var(--panel); border: 1px solid var(--line); border-radius: 3px; padding: 22px 16px; text-align: center; display: grid; gap: 8px; }
+.prices .p-name { font: 400 19px/1.25 var(--display); }
+.prices .p-price { font: 700 34px/1 var(--display); font-variant-numeric: tabular-nums; }
+.prices .p-where { font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--wave); }
+@media (max-width: 640px) { .prices { grid-template-columns: 1fr; } }

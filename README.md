@@ -20,10 +20,11 @@ V `rocnik.yml` v části `vstupenky`:
 ```yaml
 vstupenky:
   stav: prodej
-  cena: "450 Kč"
   reenio_odkaz: "https://…"     # přímý odkaz na rezervaci
   reenio_vlozeni: "https://…"   # src iframe z Reenia (nepovinné)
 ```
+
+Ceny jsou v seznamu `ceny` (název, cena, kde se kupuje).
 
 `stav: brzy` ukáže „Vstupenky v prodeji již brzy“, `stav: vyprodano` ukáže „Vyprodáno“.
 
