@@ -39,7 +39,7 @@ vstupenky:
       kde: online
     - nazev: Galerie bez místenky
       cena: "190 Kč"
-      kde: jen na místě
+      kde: online i na místě
   reenio_odkaz: ""              # přímý odkaz na rezervaci v Reeniu
   reenio_vlozeni: ""            # adresa (src) iframe z Reenia; prázdné = jen tlačítko s odkazem
 
@@ -75,7 +75,7 @@ dotazy:
   - otazka: Jaké oblečení na ples?
     odpoved: Společenský oděv. Pánové oblek, dámy večerní nebo koktejlové šaty. Námořnický doplněk potěší.
   - otazka: Dají se koupit vstupenky na místě?
-    odpoved: Na místě lze koupit jen vstup na galerii bez místenky. Vstupenky na sál a galerii s místenkou prodáváme online na tomto webu.
+    odpoved: Na místě lze koupit jen vstup na galerii bez místenky. Ten prodáváme i online, vstupenky s místenkou na sál a galerii jen online na tomto webu.
   - otazka: Kde zaparkuji?
     odpoved: U sokolovny a v okolních ulicích. Doporučujeme domluvit se na odvozu.
 
