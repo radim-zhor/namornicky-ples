@@ -24,9 +24,6 @@ kontakt:
   telefon: "+420 775 188 894"
   facebook: ""                  # odkaz na FB stránku plesu; prázdné = ikona se nezobrazí
 
-# Formulář: ID formuláře z formspree.io (část adresy za /f/). Prázdné = místo formuláře jen e-mail.
-formspree_id: ""
-
 vstupenky:
   # stav: brzy     = "Vstupenky v prodeji již brzy", bez tlačítka
   #       prodej   = tlačítko Koupit vstupenky + rezervace Reenio
