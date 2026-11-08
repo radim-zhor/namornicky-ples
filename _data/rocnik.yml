@@ -29,7 +29,17 @@ vstupenky:
   #       prodej   = tlačítko Koupit vstupenky + rezervace Reenio
   #       vyprodano = "Vyprodáno"
   stav: brzy
-  cena: ""                      # např. "450 Kč" – prázdné = nezobrazí se
+  # Ceník – zobrazí se v sekci Vstupenky (při stavu brzy i prodej). Prázdný seznam = nezobrazí se.
+  ceny:
+    - nazev: Sál s místenkou
+      cena: "390 Kč"
+      kde: online
+    - nazev: Galerie s místenkou
+      cena: "290 Kč"
+      kde: online
+    - nazev: Galerie bez místenky
+      cena: "190 Kč"
+      kde: jen na místě
   reenio_odkaz: ""              # přímý odkaz na rezervaci v Reeniu
   reenio_vlozeni: ""            # adresa (src) iframe z Reenia; prázdné = jen tlačítko s odkazem
 
