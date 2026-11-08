@@ -123,7 +123,7 @@
       <h2>Vstupenky</h2>
       <div class="rule"></div>
       {%- if v.stav == "prodej" %}
-      <p class="lead">Vstupenky s místenkou na sál i galerii prodáváme online. Po zaplacení vám přijdou e-mailem. Na místě lze koupit jen vstup na galerii bez místenky.</p>
+      <p class="lead">Všechny vstupenky prodáváme online, po zaplacení vám přijdou e-mailem. Vstup na galerii bez místenky lze koupit i na místě.</p>
       {%- if v.reenio_vlozeni != "" %}
       <div class="reenio-embed"><iframe src="{{ v.reenio_vlozeni }}" title="Rezervace vstupenek" loading="lazy"></iframe></div>
       {%- endif %}
@@ -135,7 +135,7 @@
       {%- else %}
       <div class="ticket-soon">
         <strong>Vstupenky v prodeji již brzy</strong>
-        <p>Vstupenky s místenkou budeme prodávat online na tomto webu. Začátek prodeje oznámíme{% if r.kontakt.facebook != "" %} na <a href="{{ r.kontakt.facebook }}" target="_blank" rel="noopener">Facebooku</a>{% else %} na Facebooku{% endif %}.</p>
+        <p>Vstupenky budeme prodávat online na tomto webu. Začátek prodeje oznámíme{% if r.kontakt.facebook != "" %} na <a href="{{ r.kontakt.facebook }}" target="_blank" rel="noopener">Facebooku</a>{% else %} na Facebooku{% endif %}.</p>
       </div>
       {%- endif %}
       {%- if v.stav != "vyprodano" and v.ceny.size > 0 %}
