@@ -1,0 +1,197 @@
+# ============================================================
+#  RUMOVÁ STRÁNKA – namornicky-ples.cz/rum/
+#  Stránka není v menu webu, otevírá se odkazem nebo QR kódem.
+# ============================================================
+
+# Co stránka ukazuje:
+anketa: true          # záložka Anketa (hlasování o výročním rumu)
+vecer: true           # záložka Můj večer (osobní degustace). Na plese nechat true.
+
+# Adresa Google Apps Scriptu, kam se posílají hlasy a anonymní hodnocení.
+# Prázdné = nic se neodesílá, hodnocení zůstává jen v telefonu hosta.
+odesilani_url: ""
+
+# Poznámka nad lístkem (prázdné = žádná)
+listek_poznamka: "Ukázka podle lístku 2026. Letošní lístek zveřejníme v prosinci."
+
+# ---------- ANKETA ----------
+anketa_nadpis: "Vyberte výroční rum 20. plesu"
+anketa_uvod: "K 20. ročníku nalijeme jeden rum navíc, slavnostní. Tři kandidáty jsme vybrali a ochutnali, poslední slovo máte vy."
+anketa_konec: "30. 11. 2026"
+anketa_losovani: "Ze všech, kdo vyplní e-mail, vylosujeme na plese tři hosty, kteří dostanou panáka výročního rumu."
+# Kandidáti na výroční rum (NÁVRH – potvrdit na poradě)
+kandidati:
+  - id: dictador-20
+    nazev: Dictador 20 Years
+    puvod: Kolumbie
+    cukr: 3
+    chut: káva, karamel, kakao
+    popis: Dvacítka přímo v názvu. Plný, kulatý rum zrající v dubových sudech systémem solera.
+  - id: el-dorado-21
+    nazev: El Dorado 21
+    puvod: Guyana
+    cukr: 4
+    chut: sušené ovoce, kakao, melasa
+    popis: Prémiový rum z demerarských palíren, hutný a dlouhý. Pro ty, kdo mají rádi tmavé rumy.
+  - id: zacapa-23
+    nazev: Ron Zacapa 23
+    puvod: Guatemala
+    cukr: 4
+    chut: med, vanilka, sušené švestky
+    popis: Klasika z vysočiny Guatemaly, zraje ve výšce 2 300 m. Jemný, sladší a velmi oblíbený.
+
+# Druhá otázka ankety: kolik loňských rumů může host označit
+oblibene_max: 3
+
+# ---------- LÍSTEK ----------
+# cukr: 1 = suchý … 5 = sladký. novinka: true = značka Novinka. vyrocni: true = výroční rum.
+# popis: krátký text (návrhy popisů zkontrolovat před plesem)
+# foto: název souboru v assets/img/rumy/ (nepovinné)
+rumy:
+  - id: xaymaca
+    nazev: Plantation Xaymaca
+    puvod: Jamajka
+    cukr: 1
+    cena: 80
+    chut: dub, cukrová třtina, kouřové tóny
+    popis: Suchý jamajský rum z kotlových destilátorů. Výrazný, ovocný a lehce kouřový.
+  - id: abuelo-12
+    nazev: Abuelo Añejo 12
+    puvod: Panama
+    stari: 12 let
+    cukr: 2
+    cena: 100
+    chut: kokos, dřevo
+    popis: Tmavý rum španělského typu od rodinné palírny Varela Hermanos, která pěstuje všechnu třtinu na vlastních plantážích.
+  - id: kirk-sweeney
+    nazev: Kirk & Sweeney Gran Reserva
+    puvod: Dominikánská republika
+    stari: 12 let
+    cukr: 2
+    cena: 140
+    chut: vanilka, mandle, med
+    popis: Pojmenovaný po škuneru, který za prohibice pašoval rum. Jemný a přístupný.
+  - id: eminente-7
+    nazev: Eminente Reserva
+    puvod: Kuba
+    stari: 7 let
+    cukr: 3
+    cena: 180
+    chut: kouř, vanilka, káva
+    popis: Kubánský rum s vyšším podílem silnějších destilátů, proto plnější a výraznější než běžné kubánské rumy.
+  - id: arehucas-12
+    nazev: Arehucas 12
+    puvod: Kanárské ostrovy
+    stari: 12 let
+    cukr: 3
+    cena: 140
+    chut: vanilka, cukrová třtina, ořechy, dub
+    popis: Rum z Gran Canarie, z jedné z nejstarších evropských palíren rumu.
+  - id: mount-gay-xo
+    nazev: Mount Gay XO
+    puvod: Barbados
+    cukr: 3
+    cena: 180
+    chut: kouř, vanilka, banán
+    popis: Barbados, nejstarší rumová značka světa. Blend rumů stařených 8 až 15 let.
+  - id: flor-de-cana-18
+    nazev: Flor de Caña Centenario 18
+    puvod: Nikaragua
+    stari: 18 let
+    cukr: 3
+    cena: 120
+    chut: karamel, čokoláda, jemná elegance
+    popis: Bez přidaného cukru, zraje v dubových sudech. Čistý, kořenitý, s medově sladkou vůní.
+  - id: hell-or-high-water
+    nazev: Hell or High Water XO
+    puvod: blend
+    cukr: 3
+    cena: 120
+    chut: dřevo, med, koření, ořechy
+    popis: Námořnický blend rumů z několika karibských zemí.
+  - id: barcelo-imperial
+    nazev: Barceló Imperial
+    puvod: Dominikánská republika
+    stari: 10 let
+    cukr: 3
+    cena: 80
+    chut: sušené ovoce, dub, skořice
+    popis: Rum zakladatel. Je na lístku od začátku a patří k plesu stejně jako polonéza.
+  - id: quorhum-15
+    nazev: Quorhum 15
+    puvod: Dominikánská republika
+    stari: 15 let
+    cukr: 3
+    cena: 90
+    chut: med, karamel, dřevo, ořechy, kakao
+    popis: Solera rum z Dominikánské republiky. Vyvážený a velmi pitelný.
+  - id: opthimus-18
+    nazev: Opthimus 18 Cum Laude
+    puvod: Dominikánská republika
+    stari: 18 let
+    cukr: 4
+    cena: 180
+    chut: vanilka, dřevo, sušené ovoce
+    popis: Dominikánský rum z rodinné palírny Oliver & Oliver. Hladký a jemně sladký.
+  - id: austrian-empire
+    nazev: Austrian Empire Navy Anniversario
+    puvod: Barbados
+    cukr: 4
+    cena: 140
+    chut: vanilka, kokos, nasládlý závěr
+    popis: Námořnický rum uvedený ke stému výročí konce monarchie. Tmavě mahagonový, plný tropického ovoce.
+  - id: espero-xo
+    nazev: Espero Extra Añejo XO
+    puvod: Karibik
+    stari: 18 let
+    cukr: 4
+    cena: 100
+    chut: banán, kokos, med
+    popis: Sladší karibský blend s tóny tropického ovoce.
+  - id: serum-ancon
+    nazev: Serum Ancon 10
+    puvod: Panama
+    stari: 10 let
+    cukr: 5
+    cena: 140
+    chut: čokoláda, ořechy, kakao
+    popis: Panamský rum dezertního typu, hustý a čokoládový.
+  - id: pyrat-xo
+    nazev: Pyrat XO Reserve
+    puvod: Anguilla
+    stari: 15 let
+    cukr: 5
+    cena: 100
+    chut: pomeranč, marcipán
+    popis: Dezertní rum s výrazným pomerančem a dlouhým koncem.
+  - id: dos-maderas
+    nazev: Dos Maderas 5+5
+    puvod: Karibik
+    stari: 5 let
+    cukr: 5
+    cena: 120
+    chut: rozinky, datlový sirup, karamel
+    popis: Pět let v Karibiku, pak pět let ve Španělsku v sudech po sherry Pedro Ximénez.
+  - id: ah-riise-navy
+    nazev: A. H. Riise Royal Danish Navy
+    puvod: St. Thomas
+    stari: 20 let
+    cukr: 5
+    cena: 140
+    chut: karamel, káva, lékořice
+    popis: Navazuje na příděly rumu dánského královského námořnictva. Na plese se vyprodal každý rok.
+  - id: bumbu
+    nazev: Bumbu Original
+    puvod: Barbados
+    cukr: 5
+    cena: 100
+    chut: banán, čokoláda, vaječný koňak
+    popis: Blend osmi karibských rumů. Sladký, krémový, skoro dezert.
+  - id: legendario
+    nazev: Legendario Elixir de Cuba
+    puvod: Kuba
+    stari: 7 let
+    cukr: 5
+    cena: 70
+    chut: rozinky, pomeranč
+    popis: Kubánský likérový rum s macerovanými rozinkami. Nejsladší na lístku.
