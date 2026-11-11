@@ -28,7 +28,7 @@ vstupenky:
   # stav: brzy     = "Vstupenky v prodeji již brzy", bez tlačítka
   #       prodej   = tlačítko Koupit vstupenky + rezervace Reenio
   #       vyprodano = "Vyprodáno"
-  stav: brzy
+  stav: prodej
   # Ceník – zobrazí se v sekci Vstupenky (při stavu brzy i prodej). Prázdný seznam = nezobrazí se.
   ceny:
     - nazev: Sál s místenkou
@@ -40,7 +40,7 @@ vstupenky:
     - nazev: Galerie bez místenky
       cena: "190 Kč"
       kde: online i na místě
-  reenio_odkaz: ""              # přímý odkaz na rezervaci v Reeniu
+  reenio_odkaz: "https://namornicky-ples.reenio.cz/cs/"              # přímý odkaz na rezervaci v Reeniu
   reenio_vlozeni: ""            # adresa (src) iframe z Reenia; prázdné = jen tlačítko s odkazem
 
 # Program večera. Položky bez času se zobrazí s textem "během večera".
