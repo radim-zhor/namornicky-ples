@@ -131,11 +131,11 @@
       <div class="center"><a class="btn" href="{{ v.reenio_odkaz }}" target="_blank" rel="noopener">{% if v.reenio_vlozeni != "" %}Otevřít rezervaci v novém okně{% else %}Koupit vstupenky{% endif %}</a></div>
       {%- endif %}
       {%- elsif v.stav == "vyprodano" %}
-      <div class="ticket-soon"><strong>Vyprodáno</strong><p>Děkujeme za zájem. Pokud se uvolní místa, dáme vědět na Facebooku.</p></div>
+      <div class="ticket-soon"><strong>Vyprodáno</strong><p>Děkujeme za zájem. Pokud se uvolní místa, dáme vědět {% if r.kontakt.facebook_udalost != "" %}v <a href="{{ r.kontakt.facebook_udalost }}" target="_blank" rel="noopener">události na Facebooku</a>{% else %}na Facebooku{% endif %}.</p></div>
       {%- else %}
       <div class="ticket-soon">
         <strong>Vstupenky v prodeji již brzy</strong>
-        <p>Vstupenky budeme prodávat online na tomto webu. Začátek prodeje oznámíme{% if r.kontakt.facebook != "" %} na <a href="{{ r.kontakt.facebook }}" target="_blank" rel="noopener">Facebooku</a>{% else %} na Facebooku{% endif %}.</p>
+        <p>Vstupenky budeme prodávat online na tomto webu. {% assign fb = r.kontakt.facebook_udalost | default: r.kontakt.facebook %}Začátek prodeje oznámíme{% if fb != "" %} v <a href="{{ fb }}" target="_blank" rel="noopener">události na Facebooku</a>{% else %} na Facebooku{% endif %}.</p>
       </div>
       {%- endif %}
       {%- if v.stav != "vyprodano" and v.ceny.size > 0 %}
@@ -179,6 +179,9 @@
         <a href="assets/soubory/{{ s.soubor }}"><span>PDF</span>{{ s.nazev }}</a>
         {%- endfor %}
         <a href="ples.ics"><span>ICS</span>Přidat do kalendáře</a>
+        {%- if r.kontakt.facebook_udalost != "" %}
+        <a href="{{ r.kontakt.facebook_udalost }}" target="_blank" rel="noopener"><span>FB</span>Událost na Facebooku</a>
+        {%- endif %}
       </div>
     </div>
   </section>

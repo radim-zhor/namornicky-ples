@@ -23,6 +23,7 @@ kontakt:
   email: info@namornicky-ples.cz
   telefon: "+420 775 188 894"
   facebook: ""                  # odkaz na FB stránku plesu; prázdné = ikona se nezobrazí
+  facebook_udalost: "https://fb.me/e/79IwOdDJJ"   # FB událost ročníku; prázdné = odkaz se nezobrazí
 
 vstupenky:
   # stav: brzy     = "Vstupenky v prodeji již brzy", bez tlačítka
