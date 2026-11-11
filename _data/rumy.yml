@@ -17,7 +17,7 @@ listek_poznamka: "Ukázka podle lístku 2026. Letošní lístek zveřejníme v p
 # ---------- ANKETA ----------
 anketa_nadpis: "Vyberte výroční rum 20. plesu"
 anketa_uvod: "K 20. ročníku nalijeme jeden rum navíc, slavnostní. Tři kandidáty jsme vybrali a ochutnali, poslední slovo máte vy."
-anketa_konec: "30. 11. 2026"
+anketa_konec: "6. 12. 2026"           # hlasování pá 20. 11. – ne 6. 12., vítěz út 8. 12. (návrh, čeká na potvrzení)
 anketa_losovani: "Ze všech, kdo vyplní e-mail, vylosujeme na plese tři hosty, kteří dostanou panáka výročního rumu."
 # Kandidáti na výroční rum (NÁVRH – potvrdit na poradě)
 kandidati:
