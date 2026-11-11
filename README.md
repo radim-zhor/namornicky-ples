@@ -51,3 +51,14 @@ jekyll serve
 ```
 
 Web pak běží na http://localhost:4000.
+
+## Rumová stránka (`/rum/`)
+
+Mobilní stránka [namornicky-ples.cz/rum/](https://namornicky-ples.cz/rum/) pro hosty: anketa o výroční rum, rumový lístek s popisy
+a osobní degustace „Můj večer“ (hodnocení se ukládá v telefonu hosta a jde uložit jako obrázek). Stránka není v menu, sdílí se odkazem nebo QR kódem.
+
+Vše se nastavuje v [`_data/rumy.yml`](_data/rumy.yml): zapnutí ankety (`anketa`) a degustace (`vecer`), kandidáti na výroční rum, seznam rumů
+(název, původ, cukr 1–5, cena, chuť, popis, případně foto do `assets/img/rumy/`).
+
+Hlasy a anonymní hodnocení se posílají do Google tabulky přes Google Apps Script. Návod na nasazení je v hlavičce
+[`tools/rum-apps-script.gs`](tools/rum-apps-script.gs); adresu webové aplikace pak vlož do `odesilani_url`. Dokud je prázdná, stránka běží ve zkušebním režimu a nic neodesílá.

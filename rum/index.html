@@ -1,0 +1,513 @@
+---
+---
+{%- assign r = site.data.rocnik -%}
+{%- assign k = site.data.rumy -%}
+<!doctype html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Rumový lístek · Námořnický ples {{ r.rok }}</title>
+<meta name="description" content="Rumy {{ r.rocnik }}. Námořnického plesu: lístek s popisy, anketa o výroční rum a osobní degustace na mobilu.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#0F1324">
+<link rel="icon" href="{{ '/assets/img/favicon.png' | relative_url }}">
+<meta property="og:title" content="Rumový lístek · Námořnický ples {{ r.rok }}">
+<meta property="og:description" content="{{ k.anketa_nadpis }}">
+<meta property="og:image" content="{{ site.url }}/assets/img/og-2027.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;600;700&family=Jost:wght@300;400;500;600&display=swap">
+<style>
+/* Mobilní stránka k rumům: anketa, lístek, osobní degustace. Brand: tmavě námořnická plocha, Palatino/Crimson Pro + Jost, červené akční tlačítko. */
+:root {
+  --paper: #151A2C; --deep: #0F1324; --panel: #1D2440; --panel-2: #232B4B; --line: #2C3550;
+  --ink: #E9EDF6; --muted: #A3ADC4; --wave: #8DA5CF; --navy: #1A468E;
+  --signal: #D0362F; --signal-hover: #E2554C; --gold: #D9B26A;
+  --amber: #E0A458; --good: #D0362F; --ok: #E0A458; --bad: #6B7593; --card: #1F2747; --tile: #FFFFFF;
+  --display: "Palatino Linotype", Palatino, "Book Antiqua", "Crimson Pro", Georgia, serif;
+  --body: "Jost", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  --tabbar: 64px;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+html, body { margin: 0; }
+body { background: var(--paper); color: var(--ink); font: 300 16px/1.55 var(--body); min-height: 100dvh; padding-bottom: calc(var(--tabbar) + env(safe-area-inset-bottom, 0px)); }
+button, input, textarea { font: inherit; color: inherit; }
+a { color: var(--wave); }
+:focus-visible { outline: 2px solid var(--wave); outline-offset: 2px; }
+.wrap { max-width: 640px; margin: 0 auto; padding: 0 max(16px, env(safe-area-inset-left, 0px)) 0 max(16px, env(safe-area-inset-right, 0px)); }
+h1, h2, h3 { font-family: var(--display); font-weight: 700; margin: 0; text-wrap: balance; }
+
+/* Hlavička */
+.top { background: var(--deep); border-bottom: 1px solid var(--line); padding-top: env(safe-area-inset-top, 0px); }
+.top .wrap { display: flex; align-items: center; gap: 14px; padding-block: 14px; }
+.top img { height: 46px; width: auto; flex: none; }
+.top .eyebrow { font: 500 11px/1.2 var(--body); letter-spacing: .22em; text-transform: uppercase; color: var(--wave); }
+.top h1 { font-size: 24px; line-height: 1.1; margin-top: 3px; letter-spacing: .01em; }
+
+/* Záložky dole */
+.tabbar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 30; background: rgba(15,19,36,.97); backdrop-filter: blur(8px); border-top: 1px solid var(--line); padding-bottom: env(safe-area-inset-bottom, 0px); }
+.tabbar .wrap { display: flex; padding: 0; }
+.tabbar a { flex: 1; height: var(--tabbar); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; text-decoration: none; color: var(--muted); font-size: 12px; font-weight: 500; letter-spacing: .04em; position: relative; }
+.tabbar a svg { width: 24px; height: 24px; }
+.tabbar a[aria-current="page"] { color: #fff; }
+.tabbar a[aria-current="page"]::before { content: ""; position: absolute; top: 0; left: 28%; right: 28%; height: 2px; background: var(--signal); }
+.badge { position: absolute; top: 8px; left: calc(50% + 8px); min-width: 18px; height: 18px; padding: 0 5px; border-radius: 9px; background: var(--signal); color: #fff; font-size: 11px; line-height: 18px; text-align: center; }
+.badge:empty { display: none; }
+
+.view { display: none; padding: 20px 0 32px; }
+.view.on { display: block; }
+.intro { color: var(--muted); margin: 8px 0 0; }
+.note { font-size: 14px; color: var(--muted); border-left: 2px solid var(--navy); padding: 4px 0 4px 12px; margin: 14px 0 0; }
+.section-title { font-size: 26px; line-height: 1.15; }
+.section-title::after { content: ""; display: block; width: 44px; height: 2px; background: var(--signal); margin-top: 12px; }
+
+/* Cukr (kostičky jako na tištěném lístku) */
+.sugar { display: inline-flex; gap: 3px; vertical-align: middle; }
+.sugar i { width: 9px; height: 9px; border: 1px solid rgba(224,164,88,.55); border-radius: 2px; }
+.sugar i.f { background: var(--amber); border-color: var(--amber); }
+.sugar-label { font-size: 12px; color: var(--muted); margin-left: 6px; }
+
+/* Filtry */
+.chips { display: flex; gap: 8px; overflow-x: auto; padding: 16px 0 4px; margin: 0 -16px; padding-inline: 16px; scrollbar-width: none; }
+.chips::-webkit-scrollbar { display: none; }
+.chip { flex: none; border: 1px solid var(--line); background: var(--panel); border-radius: 999px; padding: 8px 14px; font-size: 14px; font-weight: 400; cursor: pointer; white-space: nowrap; }
+.chip[aria-pressed="true"] { background: var(--signal); color: #fff; border-color: var(--signal); font-weight: 500; }
+
+/* Karty rumů */
+.list { list-style: none; margin: 12px 0 0; padding: 0; display: grid; gap: 10px; }
+.rum { background: var(--card); border: 1px solid #323C64; border-radius: 10px; overflow: hidden; box-shadow: 0 1px 0 rgba(255,255,255,.03) inset, 0 6px 18px rgba(0,0,0,.18); }
+.rum.tasted { border-left: 3px solid var(--signal); }
+.rum-head { display: grid; grid-template-columns: 34px 1fr auto; gap: 12px; align-items: start; width: 100%; text-align: left; background: none; border: 0; padding: 14px 14px 12px; cursor: pointer; }
+.rum-no { font: 600 20px/1 var(--display); color: var(--muted); padding-top: 3px; text-align: center; }
+.rum-head.has-foto { grid-template-columns: 64px 1fr auto; }
+.tile { position: relative; width: 64px; height: 86px; background: var(--tile); border-radius: 8px; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+.tile img { max-width: 88%; max-height: 92%; object-fit: contain; display: block; }
+.tile b { position: absolute; top: 4px; left: 4px; min-width: 18px; height: 18px; border-radius: 9px; background: var(--deep); color: #fff; font: 600 11px/18px var(--body); text-align: center; padding: 0 4px; }
+.rum-name { font: 700 19px/1.2 var(--display); color: #fff; }
+.rum-meta { font-size: 13px; color: var(--muted); margin-top: 3px; }
+.rum-taste { font-size: 14px; margin-top: 6px; color: #D6DCEA; font-weight: 400; }
+.rum-price { font: 700 19px/1 var(--display); color: #fff; white-space: nowrap; padding-top: 3px; text-align: right; }
+.rum-price small { display: block; font: 400 11px/1 var(--body); color: var(--muted); margin-top: 4px; }
+.tag { display: inline-block; font: 500 10px/1 var(--body); letter-spacing: .12em; text-transform: uppercase; padding: 4px 6px; border-radius: 3px; margin-right: 6px; vertical-align: 2px; }
+.tag.new { background: var(--navy); color: #fff; }
+.tag.anniv { background: var(--gold); color: var(--deep); }
+.rum-body { display: none; padding: 0 14px 4px 60px; font-size: 15px; color: #C3CADB; }
+.rum-head.has-foto ~ .rum-body, .rum-head.has-foto ~ .rate { padding-left: 90px; }
+.rum.open .rum-body { display: block; }
+.rum.open .rate { display: grid; }
+.rum-price .pill { display: inline-block; margin-top: 8px; font-family: var(--body); }
+.rum.open .rum-price .pill { display: none; }
+.rum-body p { margin: 0 0 10px; }
+.rum-foto { display: block; width: 100%; height: 220px; object-fit: contain; background: var(--tile); border-radius: 8px; margin-bottom: 12px; padding: 10px; }
+.rate { display: none; grid-template-columns: repeat(3, 1fr); gap: 6px; padding: 0 14px 14px 60px; }
+.rate button { border: 1px solid var(--line); background: var(--panel-2); border-radius: 6px; padding: 9px 4px; font-size: 13px; font-weight: 400; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 2px; }
+.rate button svg { width: 20px; height: 20px; }
+.rate button[aria-pressed="true"][data-h="3"] { background: var(--good); border-color: var(--good); color: #fff; font-weight: 500; }
+.rate button[aria-pressed="true"][data-h="2"] { background: var(--ok); border-color: var(--ok); color: var(--deep); font-weight: 500; }
+.rate button[aria-pressed="true"][data-h="1"] { background: var(--bad); border-color: var(--bad); color: #fff; font-weight: 500; }
+.rate-q { grid-column: 1 / -1; font-size: 12px; color: var(--muted); letter-spacing: .04em; }
+.empty { text-align: center; color: var(--muted); padding: 32px 0; }
+
+/* Anketa */
+.q { margin-top: 26px; }
+.q h3 { font-size: 20px; }
+.q .hint { font-size: 14px; color: var(--muted); margin: 4px 0 0; }
+.cands { display: grid; gap: 10px; margin-top: 12px; }
+.cand { position: relative; display: block; background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 14px 14px 14px 50px; cursor: pointer; }
+.cand input { position: absolute; left: 16px; top: 18px; width: 20px; height: 20px; accent-color: var(--signal); }
+.cand:has(input:checked) { border-color: var(--gold); background: #262C45; }
+.cand b { font: 700 19px/1.2 var(--display); display: block; }
+.cand .rum-meta { margin-top: 2px; }
+.cand p { margin: 6px 0 0; font-size: 14px; color: var(--muted); }
+.picks { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-top: 12px; }
+.pick { display: flex; gap: 8px; align-items: center; background: var(--panel); border: 1px solid var(--line); border-radius: 6px; padding: 9px 10px; font-size: 14px; line-height: 1.25; cursor: pointer; }
+.pick input { accent-color: var(--signal); width: 18px; height: 18px; flex: none; }
+.pick:has(input:checked) { border-color: var(--wave); }
+.pick:has(input:disabled:not(:checked)) { opacity: .45; }
+.field { display: block; margin-top: 12px; }
+.field input, .field textarea { width: 100%; background: var(--panel); border: 1px solid var(--line); border-radius: 6px; padding: 11px 12px; font-size: 16px; }
+.field textarea { min-height: 76px; resize: vertical; }
+.btn { display: flex; width: 100%; align-items: center; justify-content: center; gap: 8px; background: var(--signal); color: #fff; border: 0; border-radius: 4px; font: 500 14px/1 var(--body); text-transform: uppercase; letter-spacing: .08em; text-decoration: none; padding: 17px 20px; cursor: pointer; margin-top: 24px; }
+.btn:hover { background: var(--signal-hover); }
+.btn:disabled { opacity: .5; cursor: default; }
+.btn.ghost { background: transparent; border: 1px solid var(--line); color: var(--ink); }
+.btn svg { width: 18px; height: 18px; }
+.err { color: var(--signal-hover); font-size: 14px; margin: 10px 0 0; min-height: 1em; }
+.thanks { text-align: center; padding: 28px 8px; background: var(--panel); border: 1px solid var(--line); border-radius: 8px; margin-top: 20px; }
+.thanks h3 { font-size: 24px; }
+.thanks p { color: var(--muted); margin: 8px 0 0; }
+
+/* Můj večer */
+.stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 18px; }
+.stat { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 12px 8px; text-align: center; }
+.stat b { display: block; font: 700 30px/1 var(--display); }
+.stat:first-child b { color: var(--signal-hover); }
+.stat span { font-size: 12px; color: var(--muted); }
+.progress { height: 6px; background: var(--panel); border-radius: 3px; margin-top: 14px; overflow: hidden; }
+.progress div { height: 100%; background: linear-gradient(90deg, var(--signal), var(--amber)); width: 0; transition: width .4s; }
+.progress-t { font-size: 14px; color: var(--muted); margin-top: 8px; }
+.tips { margin-top: 22px; }
+.tips h3, .mine h3 { font-size: 20px; }
+.tip { display: flex; justify-content: space-between; gap: 10px; align-items: center; background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 12px 14px; margin-top: 8px; text-decoration: none; color: var(--ink); }
+.tip small { display: block; color: var(--muted); font-size: 13px; }
+.tip b { font: 700 17px/1.2 var(--display); }
+.mine { margin-top: 22px; }
+.mine ol { list-style: none; padding: 0; margin: 8px 0 0; }
+.mine li { display: flex; justify-content: space-between; align-items: center; gap: 10px; padding: 11px 0; border-bottom: 1px solid var(--line); }
+.mine li b { font: 600 17px/1.2 var(--display); }
+.mine li small { display: block; color: var(--muted); font-size: 13px; }
+.pill { flex: none; font-size: 12px; font-weight: 500; padding: 5px 9px; border-radius: 999px; color: var(--deep); }
+.pill.h3 { background: var(--good); color: #fff; } .pill.h2 { background: var(--ok); } .pill.h1 { background: var(--bad); color: #fff; }
+.share { display: flex; gap: 10px; align-items: flex-start; font-size: 14px; color: var(--muted); margin-top: 20px; }
+.share input { accent-color: var(--signal); width: 18px; height: 18px; margin-top: 2px; flex: none; }
+.foot { text-align: center; font-size: 13px; color: var(--muted); padding: 8px 0 24px; }
+.foot a { color: var(--muted); }
+.toast { position: fixed; left: 50%; bottom: calc(var(--tabbar) + env(safe-area-inset-bottom, 0px) + 14px); transform: translate(-50%, 20px); background: var(--ink); color: var(--deep); padding: 10px 16px; border-radius: 6px; font-size: 14px; font-weight: 500; opacity: 0; pointer-events: none; transition: .25s; z-index: 40; max-width: calc(100% - 32px); }
+.toast.on { opacity: 1; transform: translate(-50%, 0); }
+@media (prefers-reduced-motion: reduce) { .toast, .progress div { transition: none; } }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a href="{{ '/' | relative_url }}" aria-label="Web Námořnického plesu"><img src="{{ '/assets/img/znak.svg' | relative_url }}" alt=""></a>
+    <div>
+      <div class="eyebrow">{{ r.rocnik }}. Námořnický ples · {{ r.datum_text }}</div>
+      <h1>Rumový lístek</h1>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- ANKETA -->
+  <section class="view" id="v-anketa" aria-labelledby="h-anketa">
+    <h2 class="section-title" id="h-anketa">{{ k.anketa_nadpis }}</h2>
+    <p class="intro">{{ k.anketa_uvod }}</p>
+    <form id="poll" novalidate>
+      <div class="q">
+        <h3>1. Který rum bude výroční?</h3>
+        <div class="cands" id="cands"></div>
+      </div>
+      <div class="q">
+        <h3>2. Které rumy z lístku nesmí chybět?</h3>
+        <p class="hint">Vyberte nejvýš {{ k.oblibene_max }}. Nevadí, když žádný.</p>
+        <div class="picks" id="picks"></div>
+      </div>
+      <div class="q">
+        <h3>3. Jaký rum byste u nás rádi ochutnali?</h3>
+        <label class="field"><span class="hint">Nepovinné. Značka, země nebo jen styl.</span>
+          <textarea name="tip" maxlength="300" placeholder="Třeba něco suchého z Jamajky…"></textarea></label>
+      </div>
+      <div class="q">
+        <h3>Losování</h3>
+        <p class="hint">{{ k.anketa_losovani }}</p>
+        <label class="field"><input type="email" name="email" autocomplete="email" inputmode="email" placeholder="váš@email.cz (nepovinné)"></label>
+      </div>
+      <button class="btn" type="submit">Odeslat hlas</button>
+      <p class="err" id="poll-err" role="alert"></p>
+      <p class="note">Hlasovat můžete do {{ k.anketa_konec }}. E-mail použijeme jen k losování a po plese ho smažeme.</p>
+    </form>
+    <div class="thanks" id="poll-thanks" hidden>
+      <h3>Díky, máme to!</h3>
+      <p>Vítěze prozradíme před plesem. Mezitím si projděte <a href="#listek">lístek</a>.</p>
+    </div>
+  </section>
+
+  <!-- LÍSTEK -->
+  <section class="view" id="v-listek" aria-labelledby="h-listek">
+    <h2 class="section-title" id="h-listek">{{ k.rumy.size }} rumů na baru</h2>
+    <p class="intro">Ťukněte na rum pro popis<span class="vecer-only"> a hodnocení. Co ochutnáte, najdete v záložce Můj večer</span>.</p>
+    {%- if k.listek_poznamka != "" %}<p class="note">{{ k.listek_poznamka }}</p>{% endif %}
+    <div class="chips" role="group" aria-label="Filtr">
+      <button class="chip" type="button" data-f="all" aria-pressed="true">Vše</button>
+      <button class="chip" type="button" data-f="dry" aria-pressed="false">Suché</button>
+      <button class="chip" type="button" data-f="mid" aria-pressed="false">Středně sladké</button>
+      <button class="chip" type="button" data-f="sweet" aria-pressed="false">Sladké</button>
+      <button class="chip vecer-only" type="button" data-f="untasted" aria-pressed="false">Neochutnané</button>
+      <button class="chip vecer-only" type="button" data-f="tasted" aria-pressed="false">Ochutnané</button>
+    </div>
+    <ol class="list" id="list"></ol>
+    <p class="empty" id="list-empty" hidden>Tady zatím nic není.</p>
+  </section>
+
+  <!-- MŮJ VEČER -->
+  <section class="view" id="v-vecer" aria-labelledby="h-vecer">
+    <h2 class="section-title" id="h-vecer">Můj rumový večer</h2>
+    <p class="intro">Vaše osobní degustace. Ukládá se jen ve vašem telefonu, nic se nepřihlašuje.</p>
+    <div class="stats">
+      <div class="stat"><b id="s-good">0</b><span>skvělý</span></div>
+      <div class="stat"><b id="s-ok">0</b><span>dobrý</span></div>
+      <div class="stat"><b id="s-bad">0</b><span>nic moc</span></div>
+    </div>
+    <div class="progress"><div id="prog"></div></div>
+    <p class="progress-t" id="prog-t"></p>
+    <div class="tips" id="tips"></div>
+    <div class="mine" id="mine"></div>
+    <button class="btn" type="button" id="save-img"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0-4-4m4 4 4-4M4 17v3h16v-3"/></svg>Uložit si večer jako obrázek</button>
+    <label class="share" id="share-row"><input type="checkbox" id="share" checked> <span>Poslat hodnocení anonymně pořadatelům. Pomůže nám vybrat rumy na další rok.</span></label>
+    <button class="btn ghost" type="button" id="reset">Začít znovu</button>
+  </section>
+
+</main>
+
+<p class="foot wrap"><a href="{{ '/' | relative_url }}">namornicky-ples.cz</a> · Pijte s rozumem, nejezděte autem.</p>
+
+<nav class="tabbar" aria-label="Sekce">
+  <div class="wrap">
+    <a href="#anketa" data-v="anketa"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 11l3 3 8-8"/><path d="M20 12v7a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h9"/></svg>Anketa</a>
+    <a href="#listek" data-v="listek"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3h8l-1 6a3 3 0 0 1-6 0z"/><path d="M12 12v7m-4 2h8"/></svg>Lístek</a>
+    <a href="#vecer" data-v="vecer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-4.5-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 5.5-7 10-7 10z"/></svg>Můj večer<span class="badge" id="badge"></span></a>
+  </div>
+</nav>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+const CFG = {{ k | jsonify }};
+const ROCNIK = {{ r.rocnik }}, DATUM = {{ r.datum_text | jsonify }}, ROK = {{ r.rok }};
+const ZNAK = {{ '/assets/img/znak.svg' | relative_url | jsonify }};
+const FOTO = {{ '/assets/img/rumy/' | relative_url | jsonify }};
+</script>
+<script>
+(() => {
+  const $ = (s, el = document) => el.querySelector(s);
+  const KEY = "np-rum-" + ROK;
+  const H = { 3: "Skvělý", 2: "Dobrý", 1: "Nic moc" };
+  const ICON = {
+    3: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-4.5-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 5.5-7 10-7 10z"/></svg>',
+    2: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"/></svg>',
+    1: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>'
+  };
+  const rums = CFG.rumy || [];
+  const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+  const sugarText = n => ["", "suchý", "polosuchý", "středně sladký", "polosladký", "sladký"][n] || "";
+  const sugar = n => `<span class="sugar" aria-label="cukr ${n} z 5">${[1,2,3,4,5].map(i => `<i class="${i <= n ? "f" : ""}"></i>`).join("")}</span>`;
+
+  // ---------- Stav v telefonu ----------
+  let st = {};
+  try { st = JSON.parse(localStorage.getItem(KEY)) || {}; } catch (e) { st = {}; }
+  st.r ??= {}; st.q ??= []; st.share ??= true;
+  st.d ??= (crypto.randomUUID ? crypto.randomUUID() : String(Date.now()) + Math.random()).slice(0, 13);
+  const save = () => { try { localStorage.setItem(KEY, JSON.stringify(st)); } catch (e) {} };
+  save();
+
+  const toast = (t) => { const el = $("#toast"); el.textContent = t; el.classList.add("on"); clearTimeout(toast.t); toast.t = setTimeout(() => el.classList.remove("on"), 2200); };
+
+  // ---------- Odesílání (Google Apps Script) ----------
+  const send = (data) => {
+    if (!CFG.odesilani_url) return Promise.resolve(false);
+    return fetch(CFG.odesilani_url, { method: "POST", mode: "no-cors", body: new URLSearchParams(data) }).then(() => true);
+  };
+  let flushT;
+  const flush = () => {
+    clearTimeout(flushT);
+    if (!st.q.length || !CFG.odesilani_url || !navigator.onLine) return;
+    const batch = st.q.slice();
+    send({ typ: "hodnoceni", data: JSON.stringify(batch) })
+      .then(ok => { if (ok) { st.q = st.q.slice(batch.length); save(); } })
+      .catch(() => {});
+  };
+  const queue = (id, h) => {
+    if (!st.share) return;
+    st.q.push({ d: st.d, r: id, h, t: new Date().toISOString() });
+    save(); clearTimeout(flushT); flushT = setTimeout(flush, 2500);
+  };
+  addEventListener("online", flush);
+  document.addEventListener("visibilitychange", () => { if (document.visibilityState === "hidden") flush(); });
+
+  // ---------- Záložky ----------
+  const views = ["anketa", "listek", "vecer"].filter(v => (v !== "anketa" || CFG.anketa) && (v !== "vecer" || CFG.vecer));
+  document.querySelectorAll(".tabbar a").forEach(a => { if (!views.includes(a.dataset.v)) a.remove(); });
+  if (!CFG.vecer) document.querySelectorAll(".vecer-only").forEach(el => el.remove());
+  const show = () => {
+    let v = location.hash.slice(1);
+    if (!views.includes(v)) v = views[0];
+    document.querySelectorAll(".view").forEach(el => el.classList.toggle("on", el.id === "v-" + v));
+    document.querySelectorAll(".tabbar a").forEach(a => a.dataset.v === v ? a.setAttribute("aria-current", "page") : a.removeAttribute("aria-current"));
+    if (v === "vecer") renderMine();
+    scrollTo(0, 0);
+  };
+  addEventListener("hashchange", show);
+
+  // ---------- Lístek ----------
+  let filter = "all";
+  const match = (x) => {
+    const h = st.r[x.id];
+    return filter === "all" || (filter === "dry" && x.cukr <= 2) || (filter === "mid" && x.cukr === 3) ||
+      (filter === "sweet" && x.cukr >= 4) || (filter === "tasted" && h) || (filter === "untasted" && !h);
+  };
+  const card = (x, i) => {
+    const h = st.r[x.id];
+    const tags = (x.vyrocni ? '<span class="tag anniv">Výroční</span>' : "") + (x.novinka ? '<span class="tag new">Novinka</span>' : "");
+    const meta = [x.puvod, x.stari].filter(Boolean).join(" · ");
+    const rate = CFG.vecer ? `<div class="rate"><span class="rate-q">Ochutnali jste? Jak vám chutnal?</span>${[3,2,1].map(n =>
+      `<button type="button" data-h="${n}" aria-pressed="${h === n}">${ICON[n]}${H[n]}</button>`).join("")}</div>` : "";
+    return `<li class="rum${h ? " tasted" : ""}" id="rum-${esc(x.id)}" data-id="${esc(x.id)}">
+      <button class="rum-head${x.foto ? " has-foto" : ""}" type="button" aria-expanded="false">
+        ${x.foto ? `<span class="tile"><img loading="lazy" alt="" src="${esc(FOTO + x.foto)}"><b>${i + 1}</b></span>` : `<span class="rum-no">${i + 1}</span>`}
+        <span><span class="rum-name">${tags}${esc(x.nazev)}</span>
+          <span class="rum-meta" style="display:block">${esc(meta)}</span>
+          <span style="display:block;margin-top:6px">${sugar(x.cukr)}<span class="sugar-label">${sugarText(x.cukr)}</span></span>
+          <span class="rum-taste" style="display:block">${esc(x.chut)}</span></span>
+        <span class="rum-price">${x.cena ? esc(x.cena) + ",-" : ""}<small>${x.cena ? "4 cl" : ""}</small>${h ? `<span class="pill h${h}">${H[h]}</span>` : ""}</span>
+      </button>
+      <div class="rum-body">${x.foto ? `<img class="rum-foto" loading="lazy" alt="${esc(x.nazev)}" src="${esc(FOTO + x.foto)}">` : ""}<p>${esc(x.popis)}</p></div>
+      ${rate}
+    </li>`;
+  };
+  const renderList = () => {
+    const html = rums.map((x, i) => match(x) ? card(x, i) : "").join("");
+    $("#list").innerHTML = html;
+    $("#list-empty").hidden = !!html;
+  };
+  document.querySelectorAll(".chip").forEach(c => c.addEventListener("click", () => {
+    filter = c.dataset.f;
+    document.querySelectorAll(".chip").forEach(b => b.setAttribute("aria-pressed", b === c));
+    renderList();
+  }));
+  $("#list").addEventListener("click", (e) => {
+    const li = e.target.closest(".rum"); if (!li) return;
+    const head = e.target.closest(".rum-head");
+    if (head) { const open = li.classList.toggle("open"); head.setAttribute("aria-expanded", open); return; }
+    const b = e.target.closest(".rate button"); if (!b) return;
+    const id = li.dataset.id, n = +b.dataset.h;
+    if (st.r[id] === n) { delete st.r[id]; queue(id, 0); toast("Hodnocení zrušeno"); }
+    else { st.r[id] = n; queue(id, n); toast(`${H[n]}! Uloženo do Můj večer`); }
+    save();
+    li.classList.toggle("tasted", !!st.r[id]);
+    li.querySelectorAll(".rate button").forEach(x => x.setAttribute("aria-pressed", st.r[id] === +x.dataset.h));
+    const pr = li.querySelector(".rum-price"), old = pr.querySelector(".pill"); if (old) old.remove();
+    if (st.r[id]) pr.insertAdjacentHTML("beforeend", `<span class="pill h${st.r[id]}">${H[st.r[id]]}</span>`);
+    updateBadge();
+    if (filter === "tasted" || filter === "untasted") setTimeout(renderList, 350);
+  });
+
+  // ---------- Můj večer ----------
+  const updateBadge = () => { const b = $("#badge"); if (b) b.textContent = Object.keys(st.r).length || ""; };
+  const tasted = () => rums.filter(x => st.r[x.id]).sort((a, b) => st.r[b.id] - st.r[a.id]);
+  const renderMine = () => {
+    const t = tasted(), c = { 3: 0, 2: 0, 1: 0 };
+    t.forEach(x => c[st.r[x.id]]++);
+    $("#s-good").textContent = c[3]; $("#s-ok").textContent = c[2]; $("#s-bad").textContent = c[1];
+    $("#prog").style.width = (rums.length ? t.length / rums.length * 100 : 0) + "%";
+    $("#prog-t").textContent = t.length ? `Ochutnáno ${t.length} z ${rums.length} rumů.` : "Zatím nic. Na lístku ťukněte na rum a ohodnoťte ho.";
+    // Tip: neochutnané rumy s cukrem nejblíž tomu, co chutnalo nejvíc
+    const liked = t.filter(x => st.r[x.id] === 3);
+    const base = liked.length ? liked : t.filter(x => st.r[x.id] === 2);
+    const left = rums.filter(x => !st.r[x.id]);
+    let tips = [];
+    if (left.length) {
+      if (base.length) {
+        const avg = base.reduce((s, x) => s + x.cukr, 0) / base.length;
+        const bad = new Set(t.filter(x => st.r[x.id] === 1).map(x => x.cukr));
+        tips = left.map(x => ({ x, d: Math.abs(x.cukr - avg) + (bad.has(x.cukr) ? .6 : 0) + (x.vyrocni ? -.3 : 0) })).sort((a, b) => a.d - b.d).slice(0, 2).map(o => o.x);
+      } else {
+        tips = [left.find(x => x.vyrocni) || left.find(x => x.cukr === 3) || left[0]].filter(Boolean);
+      }
+    }
+    $("#tips").innerHTML = tips.length ? `<h3>${base.length ? "Mohlo by vám chutnat" : "Kde začít"}</h3>` + tips.map(x =>
+      `<a class="tip" href="#listek" data-go="${esc(x.id)}"><span><b>${esc(x.nazev)}</b><small>${esc(x.chut)}</small></span>${sugar(x.cukr)}</a>`).join("") : "";
+    $("#mine").innerHTML = t.length ? `<h3>Ochutnané</h3><ol>${t.map(x =>
+      `<li><span><b>${esc(x.nazev)}</b><small>${esc(x.puvod)} · ${sugarText(x.cukr)}</small></span><span class="pill h${st.r[x.id]}">${H[st.r[x.id]]}</span></li>`).join("")}</ol>` : "";
+    $("#save-img").hidden = !t.length; $("#reset").hidden = !t.length;
+    $("#share-row").hidden = !CFG.odesilani_url;
+    $("#share").checked = st.share;
+  };
+  $("#tips").addEventListener("click", (e) => {
+    const a = e.target.closest("[data-go]"); if (!a) return;
+    e.preventDefault(); filter = "all";
+    document.querySelectorAll(".chip").forEach(b => b.setAttribute("aria-pressed", b.dataset.f === "all"));
+    location.hash = "listek"; renderList();
+    const li = document.getElementById("rum-" + a.dataset.go);
+    if (li) { li.classList.add("open"); li.scrollIntoView({ block: "center" }); }
+  });
+  $("#share").addEventListener("change", (e) => { st.share = e.target.checked; save(); });
+  $("#reset").addEventListener("click", () => {
+    if (!confirm("Smazat všechna vaše hodnocení v tomto telefonu?")) return;
+    Object.keys(st.r).forEach(id => queue(id, 0));
+    st.r = {}; save(); renderMine(); renderList(); updateBadge();
+  });
+
+  // Obrázek „Můj rumový večer“
+  $("#save-img").addEventListener("click", async () => {
+    const t = tasted(); if (!t.length) return;
+    try { await document.fonts.ready; } catch (e) {}
+    const W = 1080, rowH = 84, top = 430, Hh = top + t.length * rowH + 190;
+    const cv = document.createElement("canvas"); cv.width = W; cv.height = Hh;
+    const g = cv.getContext("2d");
+    const grd = g.createLinearGradient(0, 0, 0, Hh); grd.addColorStop(0, "#0F1324"); grd.addColorStop(1, "#1A2346");
+    g.fillStyle = grd; g.fillRect(0, 0, W, Hh);
+    g.strokeStyle = "rgba(141,165,207,.35)"; g.lineWidth = 2; g.strokeRect(36, 36, W - 72, Hh - 72);
+    try {
+      const img = new Image(); img.src = ZNAK; await img.decode();
+      const ih = 150, iw = ih * img.width / img.height; g.drawImage(img, (W - iw) / 2, 80, iw, ih);
+    } catch (e) {}
+    const serif = '"Crimson Pro", Palatino, Georgia, serif', sans = 'Jost, "Segoe UI", sans-serif';
+    g.textAlign = "center"; g.fillStyle = "#8DA5CF"; g.font = `500 26px ${sans}`;
+    g.fillText(`${ROCNIK}. NÁMOŘNICKÝ PLES · ${DATUM}`.split("").join(String.fromCharCode(8202)), W / 2, 285);
+    g.fillStyle = "#FFFFFF"; g.font = `700 68px ${serif}`; g.fillText("Můj rumový večer", W / 2, 362);
+    g.fillStyle = "#A3ADC4"; g.font = `400 28px ${sans}`;
+    g.fillText(`Ochutnáno ${t.length} z ${rums.length} rumů`, W / 2, 405);
+    const col = { 3: "#E2554C", 2: "#E0A458", 1: "#8E97B3" };
+    t.forEach((x, i) => {
+      const y = top + 40 + i * rowH;
+      g.textAlign = "left"; g.fillStyle = "#E9EDF6"; g.font = `600 34px ${serif}`;
+      let name = x.nazev; while (g.measureText(name).width > 660 && name.length > 4) name = name.slice(0, -2);
+      if (name !== x.nazev) name += "…";
+      g.fillText(name, 90, y);
+      g.fillStyle = "#A3ADC4"; g.font = `400 21px ${sans}`; g.fillText([x.puvod, sugarText(x.cukr)].filter(Boolean).join(" · "), 90, y + 30);
+      g.strokeStyle = "#2C3550"; g.beginPath(); g.moveTo(90, y + 50); g.lineTo(W - 90, y + 50); g.stroke();
+      g.textAlign = "right"; g.fillStyle = col[st.r[x.id]]; g.font = `600 28px ${sans}`; g.fillText(H[st.r[x.id]], W - 90, y + 12);
+    });
+    g.textAlign = "center"; g.fillStyle = "#A3ADC4"; g.font = `400 24px ${sans}`;
+    g.fillText("namornicky-ples.cz · druhá sobota v lednu", W / 2, Hh - 80);
+    const blob = await new Promise(res => cv.toBlob(res, "image/png"));
+    const file = new File([blob], `muj-rumovy-vecer-${ROK}.png`, { type: "image/png" });
+    if (navigator.canShare && navigator.canShare({ files: [file] })) {
+      try { await navigator.share({ files: [file], title: "Můj rumový večer" }); return; } catch (e) { if (e.name === "AbortError") return; }
+    }
+    const a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = file.name;
+    document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 4000);
+  });
+
+  // ---------- Anketa ----------
+  if (CFG.anketa) {
+    $("#cands").innerHTML = (CFG.kandidati || []).map(x => `<label class="cand"><input type="radio" name="vyrocni" value="${esc(x.id)}">
+      <b>${esc(x.nazev)}</b><span class="rum-meta" style="display:block">${esc(x.puvod)} · ${sugar(x.cukr)}<span class="sugar-label">${sugarText(x.cukr)}</span></span>
+      <p><strong style="color:var(--ink);font-weight:400">${esc(x.chut)}.</strong> ${esc(x.popis)}</p></label>`).join("");
+    $("#picks").innerHTML = rums.filter(x => !x.vyrocni).map(x => `<label class="pick"><input type="checkbox" name="oblibene" value="${esc(x.id)}">${esc(x.nazev)}</label>`).join("");
+    const max = CFG.oblibene_max || 3;
+    $("#picks").addEventListener("change", () => {
+      const boxes = [...document.querySelectorAll('[name="oblibene"]')], n = boxes.filter(b => b.checked).length;
+      boxes.forEach(b => { if (!b.checked) b.disabled = n >= max; });
+    });
+    const done = () => { $("#poll").hidden = true; $("#poll-thanks").hidden = false; };
+    if (st.voted) done();
+    $("#poll").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const f = new FormData(e.target), err = $("#poll-err");
+      if (!f.get("vyrocni")) { err.textContent = "Vyberte prosím výroční rum (otázka 1)."; return; }
+      const email = (f.get("email") || "").trim();
+      if (email && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) { err.textContent = "E-mail nevypadá správně."; return; }
+      err.textContent = "";
+      const btn = e.target.querySelector("button"); btn.disabled = true; btn.textContent = "Odesílám…";
+      try {
+        const ok = await send({ typ: "hlas", d: st.d, vyrocni: f.get("vyrocni"), oblibene: f.getAll("oblibene").join(", "), tip: (f.get("tip") || "").trim(), email });
+        if (!ok) toast("Zkušební režim: hlas se nikam neodeslal");
+        st.voted = true; save(); done();
+      } catch (x) {
+        err.textContent = "Nepodařilo se odeslat. Zkontrolujte připojení a zkuste to znovu.";
+        btn.disabled = false; btn.textContent = "Odeslat hlas";
+      }
+    });
+  }
+
+  renderList(); updateBadge(); show(); flush();
+})();
+</script>
+</body>
+</html>
