@@ -68,10 +68,10 @@
 <main id="top">
   <section class="hero" style="padding:0">
     <div class="wrap">
-      <div class="eyebrow">1. Moravská námořní · {{ r.rocnik }}. společenský</div>
-      <h1>Námořnický ples</h1>
+      <div class="jubileum" aria-hidden="true"><span class="jub-num">{{ r.rocnik }}.</span><span class="jub-lbl">jubilejní ročník</span></div>
+      <h1><span class="sr-only">{{ r.rocnik }}. </span>Námořnický ples</h1>
       <div class="rule"></div>
-      <p class="sub">hraje kapela {{ r.kapela }}</p>
+      <div class="eyebrow eyebrow-hero">1. Moravská námořní · společenský ples</div>
       {%- if v.stav == "prodej" %}
       <a class="btn" href="#vstupenky">Koupit vstupenky</a>
       {%- elsif v.stav == "vyprodano" %}
