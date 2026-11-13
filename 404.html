@@ -1,0 +1,33 @@
+---
+permalink: /404.html
+layout: null
+---
+<!doctype html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Stránka nenalezena – Námořnický ples</title>
+<script>
+  // Odkazy z e-mailů Reenia (detail rezervace, platba, PDF) někdy míří na namornicky-ples.cz
+  // místo na namornicky-ples.reenio.cz. Takové adresy přesměrujeme na rezervační systém.
+  (function () {
+    var p = location.pathname;
+    if (/^\/(cs|sk|en|de|pl|es|uk)\/(reservation|r|term|customer|voucher|payment|account)(\/|$)/.test(p) || /^\/r\//.test(p)) {
+      location.replace("https://namornicky-ples.reenio.cz" + p + location.search + location.hash);
+    }
+  })();
+</script>
+<style>
+  body { margin:0; background:#151A2C; color:#fff; font-family: Jost, "Helvetica Neue", Arial, sans-serif;
+         min-height:100vh; display:flex; align-items:center; justify-content:center; text-align:center; padding:16px; }
+  a { color:#8DA5CF; }
+</style>
+</head>
+<body>
+  <div>
+    <h1 style="font-family: Palatino, Georgia, serif;">Tahle stránka se ztratila v mlze</h1>
+    <p><a href="/">Zpět na Námořnický ples</a></p>
+  </div>
+</body>
+</html>
