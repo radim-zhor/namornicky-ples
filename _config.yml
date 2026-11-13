@@ -8,3 +8,4 @@ exclude:
   - Gemfile
   - Gemfile.lock
   - vendor
+ga4_id: G-FLZEPGPPKK        # Google Analytics 4 (měří se až po souhlasu v cookie liště); prázdné = vypnuto
