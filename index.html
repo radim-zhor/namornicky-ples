@@ -124,6 +124,13 @@
       <div class="rule"></div>
       {%- if v.stav == "prodej" %}
       <p class="lead">Všechny vstupenky prodáváme online, po zaplacení vám přijdou e-mailem. Vstup na galerii bez místenky lze koupit i na místě.</p>
+      {%- if v.ceny.size > 0 %}
+      <ul class="prices">
+        {%- for c in v.ceny %}
+        <li><span class="p-name">{{ c.nazev }}</span><span class="p-price">{{ c.cena }}</span><span class="p-where">{{ c.kde }}</span></li>
+        {%- endfor %}
+      </ul>
+      {%- endif %}
       {%- if v.reenio_kod != "" %}
       <div class="reenio-box" id="reenio-box">
         <div class="reenio-tools">
@@ -146,7 +153,7 @@
         <p>Vstupenky budeme prodávat online na tomto webu. {% assign fb = r.kontakt.facebook_udalost | default: r.kontakt.facebook %}Začátek prodeje oznámíme{% if fb != "" %} v <a href="{{ fb }}" target="_blank" rel="noopener">události na Facebooku</a>{% else %} na Facebooku{% endif %}.</p>
       </div>
       {%- endif %}
-      {%- if v.stav != "vyprodano" and v.ceny.size > 0 %}
+      {%- if v.stav == "brzy" and v.ceny.size > 0 %}
       <ul class="prices">
         {%- for c in v.ceny %}
         <li><span class="p-name">{{ c.nazev }}</span><span class="p-price">{{ c.cena }}</span><span class="p-where">{{ c.kde }}</span></li>
