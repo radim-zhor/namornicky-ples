@@ -186,10 +186,13 @@ nav .soon-link { color: var(--wave); }
 .reenio-tools button { background: none; border: 1px solid var(--line); color: var(--ink); border-radius: 3px; padding: 8px 14px; font: 400 14px/1 var(--body); cursor: pointer; }
 .reenio-tools button:hover { border-color: var(--wave); }
 .reenio-embed { background: #fff; min-height: 400px; }
-.reenio-embed iframe { display: block; width: 100%; border: 0; }
+.reenio-embed iframe { display: block; width: 100%; border: 0; min-height: max(560px, calc(100vh - 140px)); min-height: max(560px, calc(100dvh - 140px)); }
 @media (min-width: 1401px) { .reenio-embed { border-radius: 2px; overflow: hidden; } }
-.reenio-box.full { position: fixed; inset: 0; z-index: 100; width: auto; margin: 0; transform: none; background: #fff; overflow-y: auto; -webkit-overflow-scrolling: touch; padding-top: env(safe-area-inset-top, 0px); }
-.reenio-box.full .reenio-tools { position: sticky; top: 0; z-index: 1; background: var(--deep); padding: 10px 16px; }
+.reenio-box.full { position: fixed; inset: 0; z-index: 100; width: auto; margin: 0; transform: none; background: #fff; display: flex; flex-direction: column; padding-top: env(safe-area-inset-top, 0px); }
+.reenio-box.full .reenio-tools { flex: none; background: var(--deep); padding: 10px 16px; }
+.reenio-box.full .reenio-embed { flex: 1; min-height: 0; display: flex; flex-direction: column; }
+.reenio-box.full .reenio-iframe { flex: 1; display: flex; flex-direction: column; min-height: 0; }
+.reenio-box.full .reenio-embed iframe { flex: 1; height: 100% !important; min-height: 0; }
 body.reenio-open { overflow: hidden; }
 .map { padding: 0; display: block; }
 .map iframe { display: block; width: 100%; height: 100%; border: 0; filter: grayscale(.3) brightness(.9); }
