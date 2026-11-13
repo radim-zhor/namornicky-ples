@@ -219,3 +219,13 @@ dd a:hover { color: var(--wave); }
 .prices .p-price { font: 700 34px/1 var(--display); font-variant-numeric: tabular-nums; }
 .prices .p-where { font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--wave); }
 @media (max-width: 640px) { .prices { grid-template-columns: 1fr; } }
+
+/* Lišta souhlasu s cookies */
+.cookie-bar { position: fixed; left: 16px; right: 16px; bottom: calc(16px + env(safe-area-inset-bottom, 0px)); z-index: 90; max-width: 760px; margin: 0 auto; background: var(--panel); border: 1px solid var(--line); border-radius: 6px; box-shadow: 0 12px 40px rgba(0,0,0,.45); padding: 16px 20px; display: flex; gap: 16px 24px; align-items: center; flex-wrap: wrap; }
+.cookie-bar[hidden] { display: none; }
+.cookie-bar p { margin: 0; flex: 1 1 320px; font-size: 14px; line-height: 1.5; color: var(--ink); }
+.cookie-bar div { display: flex; gap: 10px; flex: none; }
+.cookie-bar .btn { padding: 11px 20px; }
+.btn-ghost { background: none; border: 1px solid var(--line); color: var(--ink); border-radius: 3px; padding: 11px 18px; font: 500 14px/1 var(--body); text-transform: uppercase; letter-spacing: .08em; cursor: pointer; }
+.btn-ghost:hover { border-color: var(--wave); }
+footer span a { color: inherit; }

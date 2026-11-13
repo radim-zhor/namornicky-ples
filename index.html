@@ -236,7 +236,7 @@
     <a class="fb" href="{{ r.kontakt.facebook }}" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M13.5 22v-8.2h2.8l.4-3.2h-3.2V8.5c0-.9.3-1.6 1.6-1.6h1.7V4.1c-.3 0-1.3-.1-2.5-.1-2.5 0-4.2 1.5-4.2 4.3v2.4H7.3v3.2h2.8V22h3.4Z"/></svg></a>
     {%- endif %}
     <span>Pořádá 1. Moravská námořní</span>
-    <span>© {{ r.rok }} Námořnický ples</span>
+    <span>© {{ r.rok }} Námořnický ples{% if site.ga4_id != "" %} · <a href="#" id="cookie-settings">Nastavení cookies</a>{% endif %}</span>
   </div>
 </footer>
 
@@ -278,5 +278,32 @@ function set(on){box.classList.toggle('full',on);document.body.classList.toggle(
 b.addEventListener('click',function(){set(!box.classList.contains('full'))});
 document.addEventListener('keydown',function(e){if(e.key==='Escape'&&box.classList.contains('full'))set(false)});})();
 </script>
+{%- if site.ga4_id != "" %}
+<div class="cookie-bar" id="cookie-bar" role="dialog" aria-live="polite" aria-label="Souhlas s cookies" hidden>
+  <p>Rádi bychom měřili návštěvnost webu přes Google Analytics, abychom věděli, odkud k nám chodíte. Použijeme k tomu cookies, jen pokud souhlasíte.</p>
+  <div><button type="button" class="btn-ghost" data-consent="denied">Odmítnout</button><button type="button" class="btn" data-consent="granted">Souhlasím</button></div>
+</div>
+<script>
+(function(){
+  var ID='{{ site.ga4_id }}', KEY='cookie-consent', bar=document.getElementById('cookie-bar');
+  function get(){try{return localStorage.getItem(KEY)}catch(e){return null}}
+  function put(v){try{localStorage.setItem(KEY,v)}catch(e){}}
+  window.dataLayer=window.dataLayer||[];
+  function gtag(){dataLayer.push(arguments)} window.gtag=gtag;
+  var loaded=false;
+  function load(){ if(loaded) return; loaded=true;
+    gtag('consent','default',{ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',analytics_storage:'granted'});
+    var s=document.createElement('script'); s.async=true; s.src='https://www.googletagmanager.com/gtag/js?id='+ID; document.head.appendChild(s);
+    gtag('js',new Date()); gtag('config',ID);
+  }
+  function choose(v){ put(v); bar.hidden=true; if(v==='granted') load(); else if(loaded) location.reload(); }
+  bar.addEventListener('click',function(e){var v=e.target.getAttribute('data-consent'); if(v) choose(v);});
+  var link=document.getElementById('cookie-settings'); if(link) link.addEventListener('click',function(e){e.preventDefault(); bar.hidden=false;});
+  var c=get(); if(c==='granted') load(); else if(!c) bar.hidden=false;
+  // Rezervace dokončená ve formuláři Reenia → událost v GA4 (jen se souhlasem)
+  window.onReenioReservation=function(data){ if(get()!=='granted') return; gtag('event','rezervace_vstupenek',{method:'reenio'}); };
+})();
+</script>
+{%- endif %}
 </body>
 </html>
