@@ -125,8 +125,11 @@
       {%- if v.stav == "prodej" %}
       <p class="lead">Všechny vstupenky prodáváme online, po zaplacení vám přijdou e-mailem. Vstup na galerii bez místenky lze koupit i na místě.</p>
       {%- if v.reenio_kod != "" %}
-      <div class="reenio-embed">
+      <div class="reenio-box" id="reenio-box">
+        <div class="reenio-tools"><button type="button" id="reenio-full" aria-pressed="false">Zobrazit přes celou obrazovku</button></div>
+        <div class="reenio-embed">
 {{ v.reenio_kod }}
+        </div>
       </div>
       {%- elsif v.reenio_odkaz != "" %}
       <div class="center"><a class="btn" href="{{ v.reenio_odkaz }}" target="_blank" rel="noopener">Koupit vstupenky</a></div>
@@ -257,6 +260,12 @@
   window.addEventListener('scroll', spy, { passive: true }); spy();
 
 })();
+</script>
+<script>
+(function(){var b=document.getElementById('reenio-full'),box=document.getElementById('reenio-box');if(!b||!box)return;
+function set(on){box.classList.toggle('full',on);document.body.classList.toggle('reenio-open',on);b.setAttribute('aria-pressed',on);b.textContent=on?'Zavřít celou obrazovku ✕':'Zobrazit přes celou obrazovku';if(!on)box.scrollIntoView({block:'start'});}
+b.addEventListener('click',function(){set(!box.classList.contains('full'))});
+document.addEventListener('keydown',function(e){if(e.key==='Escape'&&box.classList.contains('full'))set(false)});})();
 </script>
 </body>
 </html>
