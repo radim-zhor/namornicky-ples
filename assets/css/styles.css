@@ -191,6 +191,7 @@ nav .soon-link { color: var(--wave); }
 .reenio-box.full { position: fixed; inset: 0; z-index: 100; width: auto; margin: 0; transform: none; background: #fff; display: flex; flex-direction: column; padding-top: env(safe-area-inset-top, 0px); }
 .reenio-box.full .reenio-tools { flex: none; background: var(--deep); padding: 10px 16px; }
 .reenio-box.full .reenio-embed { flex: 1; min-height: 0; display: flex; flex-direction: column; }
+.reenio-embed .reenio-iframe { height: auto !important; }
 .reenio-box.full .reenio-iframe { flex: 1; display: flex; flex-direction: column; min-height: 0; }
 .reenio-box.full .reenio-embed iframe { flex: 1; height: 100% !important; min-height: 0; }
 body.reenio-open { overflow: hidden; }
