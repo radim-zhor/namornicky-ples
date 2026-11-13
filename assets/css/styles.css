@@ -180,8 +180,8 @@ nav .soon-link { color: var(--wave); }
 .ticket-soon { max-width: 640px; margin: 48px auto 0; background: var(--panel); border: 1px solid var(--line); border-radius: 3px; padding: 36px 28px; text-align: center; display: grid; gap: 14px; justify-items: center; }
 .ticket-soon strong { font: 700 clamp(24px, 3.2vw, 30px)/1.2 var(--display); }
 .ticket-soon p { margin: 0; color: var(--muted); max-width: 48ch; }
-.reenio-embed { margin-top: 48px; background: #fff; border-radius: 2px; overflow: hidden; }
-.reenio-embed iframe { display: block; width: 100%; min-height: 560px; border: 0; }
+.reenio-embed { margin-top: 48px; background: #fff; border-radius: 2px; overflow: hidden; min-height: 400px; }
+.reenio-embed iframe { display: block; width: 100%; border: 0; }
 .map { padding: 0; display: block; }
 .map iframe { display: block; width: 100%; height: 100%; border: 0; filter: grayscale(.3) brightness(.9); }
 .map-link { text-align: center; margin-top: 12px; font-size: 14px; }
