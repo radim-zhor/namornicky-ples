@@ -44,7 +44,9 @@ vstupenky:
   reenio_odkaz: "https://namornicky-ples.reenio.cz/cs/"              # přímý odkaz na rezervaci v Reeniu
   # Formulář Reenia vložený přímo na web: celý kód z Reenia (Nastavení → Vložení do webu → Vložení do stránky).
   # Když je vyplněný, tlačítko s odkazem se nezobrazí.
-  reenio_kod: ""
+  reenio_kod: |
+    <div class="reenio-iframe" data-size="auto"></div>
+    <script src="https://reenio.cz/cs/GE2TEOJU/widget-iframe.js" async defer></script>
 
 # Program večera. Položky bez času se zobrazí s textem "během večera".
 program_poznamka: "Podrobný program upřesníme."
