@@ -171,8 +171,9 @@ footer a:hover { color: var(--ink); }
 .fb svg { width: 16px; height: 16px; }
 
 /* Doplňky webu */
-.brand img { height: 22px; width: auto; display: block; }
-footer .brand img { height: 18px; }
+.brand img { height: 40px; width: auto; display: block; }
+footer .brand img { height: 32px; }
+@media (max-width: 400px) { header .brand img { height: 34px; } }
 .cols .num img { height: 58px; width: auto; opacity: .55; display: inline-block; }
 .soon { display: inline-block; margin-top: 96px; padding: 15px 30px; border: 1px solid rgba(255,255,255,.55); border-radius: 3px; font: 500 14px/1 var(--body); text-transform: uppercase; letter-spacing: .12em; background: rgba(15,19,36,.45); }
 nav .soon-link { color: var(--wave); }
