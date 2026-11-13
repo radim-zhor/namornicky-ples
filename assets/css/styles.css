@@ -180,8 +180,17 @@ nav .soon-link { color: var(--wave); }
 .ticket-soon { max-width: 640px; margin: 48px auto 0; background: var(--panel); border: 1px solid var(--line); border-radius: 3px; padding: 36px 28px; text-align: center; display: grid; gap: 14px; justify-items: center; }
 .ticket-soon strong { font: 700 clamp(24px, 3.2vw, 30px)/1.2 var(--display); }
 .ticket-soon p { margin: 0; color: var(--muted); max-width: 48ch; }
-.reenio-embed { margin-top: 48px; background: #fff; border-radius: 2px; overflow: hidden; min-height: 400px; }
+/* Formulář Reenia: přes celou šířku okna (max 1400 px), na přání přes celou obrazovku */
+.reenio-box { margin-top: 48px; width: min(100vw, 1400px); margin-left: 50%; transform: translateX(-50%); }
+.reenio-tools { display: flex; justify-content: flex-end; padding: 0 16px 10px; }
+.reenio-tools button { background: none; border: 1px solid var(--line); color: var(--ink); border-radius: 3px; padding: 8px 14px; font: 400 14px/1 var(--body); cursor: pointer; }
+.reenio-tools button:hover { border-color: var(--wave); }
+.reenio-embed { background: #fff; min-height: 400px; }
 .reenio-embed iframe { display: block; width: 100%; border: 0; }
+@media (min-width: 1401px) { .reenio-embed { border-radius: 2px; overflow: hidden; } }
+.reenio-box.full { position: fixed; inset: 0; z-index: 100; width: auto; margin: 0; transform: none; background: #fff; overflow-y: auto; -webkit-overflow-scrolling: touch; padding-top: env(safe-area-inset-top, 0px); }
+.reenio-box.full .reenio-tools { position: sticky; top: 0; z-index: 1; background: var(--deep); padding: 10px 16px; }
+body.reenio-open { overflow: hidden; }
 .map { padding: 0; display: block; }
 .map iframe { display: block; width: 100%; height: 100%; border: 0; filter: grayscale(.3) brightness(.9); }
 .map-link { text-align: center; margin-top: 12px; font-size: 14px; }
