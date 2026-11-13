@@ -58,6 +58,12 @@ nav .btn:hover { color: #fff; }
 .hero::before { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(15,19,36,.35) 0%, rgba(15,19,36,.15) 45%, rgba(21,26,44,.75) 100%); }
 .hero .wrap { position: relative; padding-block: 72px 130px; }
 .eyebrow { font: 500 13px/1 var(--body); text-transform: uppercase; letter-spacing: .28em; color: var(--wave); text-shadow: 0 1px 6px rgba(15,19,36,.9); }
+.jubileum { display: flex; flex-direction: column; align-items: center; color: #fff; text-shadow: 0 2px 18px rgba(15,19,36,.85); }
+.jub-num { font: 700 clamp(88px, 15vw, 168px)/.85 var(--display); letter-spacing: -.02em; }
+.jub-lbl { display: flex; align-items: center; gap: 14px; margin-top: 10px; font: 500 14px/1 var(--body); text-transform: uppercase; letter-spacing: .32em; }
+.jub-lbl::before, .jub-lbl::after { content: ""; width: 44px; height: 2px; background: var(--signal); }
+.eyebrow-hero { margin-top: 20px; font-size: 14px; color: #fff; opacity: .92; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 .hero h1 { font-size: clamp(40px, 8vw, 84px); line-height: 1; text-transform: uppercase; letter-spacing: .01em; margin-top: 18px; }
 .hero h1 + .rule { width: min(560px, 90%); height: 1px; background: #fff; margin: 26px auto 0; }
 .hero .sub { font: 400 clamp(18px, 2.4vw, 22px)/1.4 var(--display); font-style: italic; margin: 22px 0 0; }
