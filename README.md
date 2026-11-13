@@ -21,7 +21,9 @@ V `rocnik.yml` v části `vstupenky`:
 vstupenky:
   stav: prodej
   reenio_odkaz: "https://…"     # přímý odkaz na rezervaci
-  reenio_vlozeni: "https://…"   # src iframe z Reenia (nepovinné)
+  reenio_kod: |                 # kód z Reenia: Nastavení → Vložení do webu → Vložení do stránky (nepovinné)
+    <div class="reenio-iframe" …></div>
+    <script src="…" async defer></script>
 ```
 
 Ceny jsou v seznamu `ceny` (název, cena, kde se kupuje).

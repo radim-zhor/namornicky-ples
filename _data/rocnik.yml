@@ -42,7 +42,9 @@ vstupenky:
       cena: "190 Kč"
       kde: online i na místě
   reenio_odkaz: "https://namornicky-ples.reenio.cz/cs/"              # přímý odkaz na rezervaci v Reeniu
-  reenio_vlozeni: ""            # adresa (src) iframe z Reenia; prázdné = jen tlačítko s odkazem
+  # Formulář Reenia vložený přímo na web: celý kód z Reenia (Nastavení → Vložení do webu → Vložení do stránky).
+  # Když je vyplněný, tlačítko s odkazem se nezobrazí.
+  reenio_kod: ""
 
 # Program večera. Položky bez času se zobrazí s textem "během večera".
 program_poznamka: "Podrobný program upřesníme."

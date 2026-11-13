@@ -124,11 +124,12 @@
       <div class="rule"></div>
       {%- if v.stav == "prodej" %}
       <p class="lead">Všechny vstupenky prodáváme online, po zaplacení vám přijdou e-mailem. Vstup na galerii bez místenky lze koupit i na místě.</p>
-      {%- if v.reenio_vlozeni != "" %}
-      <div class="reenio-embed"><iframe src="{{ v.reenio_vlozeni }}" title="Rezervace vstupenek" loading="lazy"></iframe></div>
-      {%- endif %}
-      {%- if v.reenio_odkaz != "" %}
-      <div class="center"><a class="btn" href="{{ v.reenio_odkaz }}" target="_blank" rel="noopener">{% if v.reenio_vlozeni != "" %}Otevřít rezervaci v novém okně{% else %}Koupit vstupenky{% endif %}</a></div>
+      {%- if v.reenio_kod != "" %}
+      <div class="reenio-embed">
+{{ v.reenio_kod }}
+      </div>
+      {%- elsif v.reenio_odkaz != "" %}
+      <div class="center"><a class="btn" href="{{ v.reenio_odkaz }}" target="_blank" rel="noopener">Koupit vstupenky</a></div>
       {%- endif %}
       {%- elsif v.stav == "vyprodano" %}
       <div class="ticket-soon"><strong>Vyprodáno</strong><p>Děkujeme za zájem. Pokud se uvolní místa, dáme vědět {% if r.kontakt.facebook_udalost != "" %}v <a href="{{ r.kontakt.facebook_udalost }}" target="_blank" rel="noopener">události na Facebooku</a>{% else %}na Facebooku{% endif %}.</p></div>
