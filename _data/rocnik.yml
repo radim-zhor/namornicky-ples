@@ -45,7 +45,7 @@ vstupenky:
   # Formulář Reenia vložený přímo na web: celý kód z Reenia (Nastavení → Vložení do webu → Vložení do stránky).
   # Když je vyplněný, tlačítko s odkazem se nezobrazí.
   reenio_kod: |
-    <div class="reenio-iframe" data-size="auto"></div>
+    <div class="reenio-iframe" data-size="auto" data-url="/terms;hideFooter=2;hideMenu=2;hideBreadcrumb=2"></div>
     <script src="https://reenio.cz/cs/GE2TEOJU/widget-iframe.js" async defer></script>
 
 # Program večera. Položky bez času se zobrazí s textem "během večera".
